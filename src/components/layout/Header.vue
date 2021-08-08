@@ -113,7 +113,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center self-center md:flex hidden">
+                    <div class="flex items-center self-center md:flex">
                         <div class="flex lg:mr-4 btn-search md:pr-3 lg:mr-0">
                             <img
                                 src="/images/icons/iconSearch.svg"
