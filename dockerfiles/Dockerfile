@@ -6,6 +6,7 @@ COPY ./package.json /app/
 COPY ./yarn.lock /app/
 COPY ./start.sh /app/
 RUN yarn install
+COPY . .
 
 FROM node:16-alpine
 WORKDIR /app
