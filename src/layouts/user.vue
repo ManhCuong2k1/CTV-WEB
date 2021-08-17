@@ -58,7 +58,7 @@
         {
             hid: 'og:image',
             property: 'og:image',
-            content: `${APP_URL}/og-facebook-3.png`,
+            content: 'og-facebook-3.png',
         },
         {
             hid: 'twitter:title',
