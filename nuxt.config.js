@@ -48,12 +48,14 @@ export default {
 
     css: [
         'element-ui/lib/theme-chalk/index.css',
+        '@fortawesome/fontawesome-free/css/all.css',
     ],
 
     plugins: [
         '@/plugins/constants',
         '@/plugins/element-ui',
         '@/plugins/filters',
+        '@/plugins/swiper',
         { src: '@/plugins/persistedState.js' },
     ],
 
