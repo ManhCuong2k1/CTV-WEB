@@ -593,3 +593,11 @@ input:checked + img {
 .h-fit-content {
     height: fit-content;
 }
+.swiper-pagination-bullet {
+    background-color: #ffffff !important;
+}
+swiper-container-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+    bottom: 10px;
+}

@@ -4,7 +4,7 @@
             :class="$style['category-image']"
             class="flex justify-center items-center bg-gray-300 hover:shadow-xl"
             :src="category.image"
-            :fit="fit"
+            fit="fill"
         >
             <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline text-lg" />
