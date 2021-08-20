@@ -10,7 +10,9 @@
             <el-col :xs="6" :sm="4" class="flex justify-end items-center">
                 <i class="text-2xl 2xl:mr-9 md:mr-7 sm:mr-4 mr-2 el-icon-shopping-cart-1" />
                 <i class="text-2xl 2xl:mr-9 md:mr-7 sm:mr-4 mr-2 far fa-bell" />
-                <i class="text-2xl far fa-user-circle" />
+                <nuxt-link to="/me">
+                    <i class="text-2xl far fa-user-circle" />
+                </nuxt-link>
             </el-col>
         </el-row>
     </div>

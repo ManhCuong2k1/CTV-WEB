@@ -7,12 +7,18 @@
             <el-divider direction="vertical" />
             <span>Tải app</span>
         </div>
-        <div>
-            <span>Đăng ký thành viên</span>
+        <div class="flex items-center">
+            <nuxt-link to="/me/partner/register">
+                Đăng ký thành viên
+            </nuxt-link>
             <el-divider direction="vertical" />
-            <span>Đăng ký NCC</span>
+            <nuxt-link to="/me/agency/register">
+                Đăng ký NCC
+            </nuxt-link>
             <el-divider direction="vertical" />
-            <span>Đăng nhập</span>
+            <nuxt-link to="/login">
+                Đăng nhập
+            </nuxt-link>
         </div>
     </div>
 </template>
