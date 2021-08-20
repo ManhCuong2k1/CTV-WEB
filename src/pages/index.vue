@@ -117,18 +117,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="py-6">
-            <div class="index-section flex flex-col justify-center items-center">
-                <div class="text-lg mb-2">Tham gia cộng đồng CTVpro</div>
-                <div class="flex items-center">
-                    <el-button size="medium" type="warning" class="px-4">ĐĂNG KÝ TÀI KHOẢN</el-button>
-                    <el-button type="text" class="ml-2">
-                        hoặc <span class="underline">Đăng nhập</span>
-                    </el-button>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -181,6 +169,6 @@
 
 <style lang="scss" scope>
     .index-section {
-        @apply mx-auto lg:w-9/12;
+        @apply mx-auto lg:w-8/12;
     }
 </style>
