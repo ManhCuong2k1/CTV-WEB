@@ -1,27 +1,25 @@
 <template>
-    <el-carousel height="270px">
-        <el-carousel-item v-for="item in 4" :key="item">
-            <h3 class="small">
-                {{ item }}
-            </h3>
-        </el-carousel-item>
-    </el-carousel>
+    <div>
+        <swiper :options="swiperOption" class="rounded-md">
+            <swiper-slide v-for="(category, index) in categories" :key="index">
+                <img src="https://i0.wp.com/s1.uphinh.org/2021/08/23/8010020e9c360f0ba9b3969bbc7499c3-2.png">
+            </swiper-slide>
+        </swiper>
+    </div>
 </template>
 
-<style>
-    .el-carousel__item h3 {
-        color: #475669;
-        font-size: 14px;
-        opacity: 0.75;
-        line-height: 270px;
-        margin: 0;
-    }
+<script>
+    import { mapState } from 'vuex';
 
-    .el-carousel__item:nth-child(2n) {
-        background-color: #99a9bf;
-    }
+    export default {
+        data: () => ({
+            swiperOption: {
+                slidesPerView: 1,
+            },
+        }),
 
-    .el-carousel__item:nth-child(2n+1) {
-        background-color: #d3dce6;
-    }
-</style>
+        computed: {
+            ...mapState('categories', ['categories']),
+        },
+    };
+</script>

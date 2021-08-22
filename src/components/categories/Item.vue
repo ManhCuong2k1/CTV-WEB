@@ -1,17 +1,10 @@
 <template>
     <nuxt-link :to="`/c/${category.slug}`" class="flex flex-col items-center">
-        <el-image
-            :class="$style['category-image']"
-            class="flex justify-center items-center bg-gray-300 hover:shadow-xl"
-            :src="category.image"
-            fit="fill"
-        >
-            <div slot="error" class="image-slot">
-                <i class="el-icon-picture-outline text-lg" />
-            </div>
-        </el-image>
+        <div class="rounded-3xl w-24 h-24 mb-2 bg-blue-200 flex justify-center flex-col">
+            <img class="w-20 mx-auto" src="https://i0.wp.com/s1.uphinh.org/2021/08/23/sim-den-trang-1.png">
+        </div>
         <div class="text-center">
-            {{ category.name }}
+            Sim số đẹp
         </div>
     </nuxt-link>
 </template>

@@ -19,10 +19,10 @@
             </a>
         </div>
         <div>
-            &copy; 2021 Dolore ad dolor aliqua laboris elit ea eiusmod aliqua nisi magna.
+            &copy; 2021 - Bản quyền của CÔNG TY TNHH CÔNG NGHỆ BATTAY
         </div>
         <div class="text-xs">
-            Mollit ea eiusmod aliqua nisi magna.
+            Số 6 - Dương Đình Nghệ
         </div>
     </div>
 </template>

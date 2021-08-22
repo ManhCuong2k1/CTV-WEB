@@ -2,7 +2,11 @@
     <div>
         <el-row :gutter="10" class="flex items-center my-2">
             <el-col :xs="6" :sm="4">
-                &nbsp;
+                <div>
+                    <div class="text-3xl font-bold tracking-wider">
+                        Battay
+                    </div>
+                </div>
             </el-col>
             <el-col :xs="12" :sm="16">
                 <Search />

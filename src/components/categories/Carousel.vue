@@ -18,19 +18,16 @@
         data: () => ({
             swiperOption: {
                 slidesPerView: 4,
-                spaceBetween: 30,
+                spaceBetween: 10,
                 breakpoints: {
-                    // when window width is >= 320px
                     640: {
                         slidesPerView: 5,
                         spaceBetween: 20,
                     },
-                    // when window width is >= 480px
                     768: {
                         slidesPerView: 7,
                         spaceBetween: 30,
                     },
-                    // when window width is >= 640px
                     1024: {
                         slidesPerView: 8,
                         spaceBetween: 30,

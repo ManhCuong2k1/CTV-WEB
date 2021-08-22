@@ -1,19 +1,19 @@
 <template>
     <div>
-        <div class="bg-white">
+        <div class="bg-white py-2 px-2 sm:px-0">
             <Banner class="index-section" />
         </div>
 
         <div class="bg-white py-6">
-            <div class="index-section">
+            <div class="index-section px-2 sm:px-0">
                 <div class="text-lg font-bold mb-2">
-                    Danh mục
+                    Danh mục sản phẩm
                 </div>
                 <CategoriesCarousel />
             </div>
         </div>
 
-        <div class="bg-white mt-2">
+        <div class="bg-white mt-2 px-2 sm:px-0">
             <div class="index-section py-6">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-lg font-bold">Sản phẩm mới</span>
@@ -25,15 +25,15 @@
             </div>
         </div>
 
-        <div class="index-section">
-            <div class="mt-6 mx-auto w-3/4 lg:w-5/12">
-                <div class="font-bold text-xl text-center">
-                    Lợi ích thành viên
-                </div>
+        <div class="index-section mt-6 px-2 sm:px-0">
+            <div class="font-bold text-xl text-center">
+                Lợi ích thành viên
+            </div>
+            <div class="mt-6 grid sm:grid-col-3 sm:grid-flow-col sm:gap-4">
                 <div
                     v-for="(benefit, index) in benefits"
                     :key="index"
-                    class="flex justify-start items-center py-2"
+                    class="flex justify-start items-center mb-2 py-5 px-3 bg-white rounded-md"
                 >
                     <div class="w-12">
                         <i :class="`${benefit.icon} text-2xl pr-4`" />
@@ -47,24 +47,24 @@
                         </p>
                     </div>
                 </div>
-                <div class="flex justify-center mt-2">
-                    <el-button icon="fas fa-headset mr-1" type="warning" class="mx-auto">
-                        Đăng ký thành viên
-                    </el-button>
-                </div>
+            </div>
+            <div class="flex justify-center mt-7">
+                <el-button type="warning" class="mx-auto w-96">
+                    ĐĂNG KÝ THÀNH VIÊN
+                </el-button>
             </div>
             <div class="mt-6">
                 <div class="flex justify-between items-center mb-2">
-                    <span class="text-lg font-bold">8.123 TV đang hoạt động</span>
+                    <span class="text-lg font-bold">8.123 Thành viên đang hoạt động</span>
                     <nuxt-link to="/products" class="text-gray-400">
-                        Đăng ký TV <i class="el-icon-right" />
+                        Đăng ký <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
                 <UsersCarousel />
             </div>
         </div>
 
-        <div class="bg-white py-6 mt-4">
+        <div class="bg-white py-6 mt-4 px-2 sm:px-0">
             <div class="index-section">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-lg font-bold text-red-500">Top sản phẩm bán chạy</span>
@@ -76,7 +76,7 @@
             </div>
         </div>
 
-        <div class="py-6">
+        <div class="py-6 sm:py-12 px-2 sm:px-0">
             <div class="index-section">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-lg text-blue-500 font-bold">
@@ -90,7 +90,7 @@
             </div>
         </div>
 
-        <div class="bg-white py-6 mt-4">
+        <div class="bg-white py-6 mt-4 px-2 sm:px-0">
             <div class="index-section">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-lg font-bold text-red-500">Giá tốt hôm nay</span>
@@ -100,7 +100,7 @@
                 </div>
                 <el-row :gutter="0">
                     <el-col
-                        v-for="index in 30"
+                        v-for="index in 12"
                         :key="index"
                         :xs="12"
                         :sm="8"
@@ -112,7 +112,7 @@
                 </el-row>
                 <div class="flex justify-center mt-4">
                     <el-button type="primary" size="medium">
-                        <span class="px-48">Xem tất cả</span>
+                        <span class="md:px-48">Xem tất cả</span>
                     </el-button>
                 </div>
             </div>
@@ -120,9 +120,13 @@
 
         <div class="py-6">
             <div class="index-section flex flex-col justify-center items-center">
-                <div class="text-lg mb-2">Tham gia cộng đồng CTVpro</div>
+                <div class="text-lg mb-2">
+                    Tham gia cộng đồng BATTAY
+                </div>
                 <div class="flex items-center">
-                    <el-button size="medium" type="warning" class="px-4">ĐĂNG KÝ TÀI KHOẢN</el-button>
+                    <el-button size="medium" type="warning" class="px-4">
+                        ĐĂNG KÝ TÀI KHOẢN
+                    </el-button>
                     <el-button type="text" class="ml-2">
                         hoặc <span class="underline">Đăng nhập</span>
                     </el-button>
@@ -181,6 +185,6 @@
 
 <style lang="scss" scope>
     .index-section {
-        @apply mx-auto lg:w-8/12;
+        @apply mx-auto max-w-screen-xl;
     }
 </style>

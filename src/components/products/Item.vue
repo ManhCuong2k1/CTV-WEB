@@ -7,7 +7,7 @@
         <el-image
             :class="[$style['product-item'], !isGrid ? 'w-32' : '']"
             class="flex justify-center items-center bg-gray-300"
-            :src="product.image"
+            :src="'https://i0.wp.com/s1.uphinh.org/2021/08/23/Cover.png'"
             fit="fill"
             :autoplay="autoplay"
         >
@@ -19,19 +19,18 @@
             <p :class="{ 'h-12': isGrid }" class="overflow-ellipsis overflow-hidden">
                 {{ product.name }}
             </p>
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center mb-3">
+                <div>
+                    <span class="text-lg">Lợi nhuận: </span>
+                    <span class="text-red-500 text-xl">50.000</span>
+                </div>
+            </div>
+            <div class="flex justify-between items-center text-xs mb-4">
+                <div>Bán lẻ: ******</div>
+
                 <el-tag type="danger" effect="plain" size="mini">
                     <span class="text-xs">Đăng ký TV để xem giá</span>
                 </el-tag>
-                <el-button type="text" class="px-2">
-                    <i class="far fa-heart text-lg text-gray-400" />
-                </el-button>
-            </div>
-            <div class="flex justify-between items-center text-xs">
-                <div>Bán lẻ: ******</div>
-                <div>
-                    Lợi nhuận: <span class="text-red-500">50.000</span>
-                </div>
             </div>
         </div>
     </nuxt-link>
@@ -59,6 +58,5 @@
 <style lang="scss" module>
     .product-item {
         display: flex !important;
-        aspect-ratio: 10/12;
     }
 </style>

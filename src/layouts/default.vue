@@ -1,28 +1,33 @@
 <template>
-    <el-container class="app w-full min-h-screen relative bg-gray-200">
-        <div :class="$style.header">
-            <SubHeader class="mx-auto lg:w-8/12 text-white text-sm z-30" />
+    <div class="min-h-screen relative">
+        <div class="bg-ctv">
+            <SubHeader class="max-w-screen-xl mx-auto text-white text-sm z-30 py-1" />
         </div>
-        <el-header :class="$style.header" class="sticky top-0 z-30">
-            <Header class="mx-auto lg:w-8/12 text-white" />
-        </el-header>
+        <divr class="bg-ctv hidden sm:w-full">
+            <Header class="max-w-screen-xl mx-auto text-white" />
+        </divr>
         <el-breadcrumb v-if="breadcrumb.length" class="mx-auto lg:w-8/12 py-2" separator-class="el-icon-arrow-right">
             <transition-group name="breadcrumb">
-                <el-breadcrumb-item v-for="item in breadcrumb" :key="item.link" :to="item.link" class="text-xs">
+                <el-breadcrumb-item
+                    v-for="item in breadcrumb"
+                    :key="item.link"
+                    :to="item.link"
+                    class="text-xs"
+                >
                     {{ item.title }}
                 </el-breadcrumb-item>
             </transition-group>
         </el-breadcrumb>
-        <el-container>
-            <transition name="home">
-                <el-main class="main-content -p-2" :class="$style.main">
+        <div>
+            <div>
+                <div class="main-content bg-gray-100 -p-5">
                     <nuxt />
                     <el-backtop target=".main-content" />
-                </el-main>
-            </transition>
-        </el-container>
+                </div>
+            </div>
+        </div>
         <Footer />
-    </el-container>
+    </div>
 </template>
 
 <script>
