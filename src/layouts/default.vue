@@ -3,7 +3,7 @@
         <div class="bg-ctv">
             <SubHeader class="max-w-screen-xl mx-auto text-white text-sm z-30 py-1" />
         </div>
-        <divr class="bg-ctv hidden sm:w-full">
+        <divr class="bg-ctv hidden py-2 sm:block sm:w-full sticky top-0 z-30">
             <Header class="max-w-screen-xl mx-auto text-white" />
         </divr>
         <el-breadcrumb v-if="breadcrumb.length" class="mx-auto lg:w-8/12 py-2" separator-class="el-icon-arrow-right">

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-row :gutter="10" class="flex items-center my-2">
+        <el-row :gutter="10" class="flex items-center">
             <el-col :xs="6" :sm="4">
                 <div>
                     <div class="text-3xl font-bold tracking-wider">
