@@ -11,6 +11,9 @@ body {
     font-family: "OpenSans";
     font-size: 14px;
 }
+.el-loading-spinner {
+    @apply flex justify-center items-center;
+}
 .color-primary {
     color: #49b5d8;
 }

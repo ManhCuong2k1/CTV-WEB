@@ -17,6 +17,18 @@ export default {
 
     telemetry: false,
 
+    head: {
+        title: process.env.npm_package_name || '',
+        meta: [
+            { charset: 'utf-8' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+        ],
+        link: [
+            { rel: 'icon', type: 'image/x-icon', href: '/images/logo.svg' },
+        ],
+    },
+
     components: false,
 
     dev: !isProduction,
@@ -71,7 +83,6 @@ export default {
         '@nuxtjs/axios',
         '@nuxtjs/auth-next',
         '@nuxtjs/robots',
-        '@nuxtjs/axios',
         '@nuxtjs/pwa',
         '@nuxt/content',
     ],
@@ -86,21 +97,34 @@ export default {
         },
     },
 
+    axios: {
+        baseURL: `${API_HOST}${API_PATH}`,
+        prefix: API_PATH,
+    },
+
     auth: {
         scopeKey: 'scope',
         strategies: {
             local: {
                 endpoints: {
-                    login: { url: 'a/auth/login', method: 'post', propertyName: 'token' },
-                    user: { url: 'a/auth/me', method: 'get', propertyName: false },
-                    logout: { url: 'a/auth/logout', method: 'post' },
+                    login: { url: 'auth/login-password', method: 'post', propertyName: 'token' },
+                    user: { url: 'app/users/me', method: 'get' },
+                    logout: false,
+                },
+                token: {
+                    property: 'token',
+                    global: true,
+                    required: true,
+                    type: 'Bearer',
+                },
+                user: {
+                    property: false,
+                    autoFetch: true,
                 },
             },
         },
-        redirect: {
-            login: '/login',
-            home: '/admin',
-        },
+        rewriteRedirects: false,
+        redirect: false,
         plugins: [
             './plugins/auth',
         ],
@@ -157,15 +181,15 @@ export default {
     // Content module configuration: https://go.nuxtjs.dev/config-content
     // content: {},
 
-    axios: {
-        baseURL: API_HOST,
-        browserBaseURL: API_PATH,
-    },
-
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
         extractCSS: isProduction,
         transpile: [/^element-ui/],
+        babel: {
+            plugins: [
+                '@babel/plugin-proposal-optional-chaining',
+            ],
+        },
     },
 
     privateRuntimeConfig: {

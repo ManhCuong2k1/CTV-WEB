@@ -3,7 +3,7 @@ export const isSameURL = (a, b) => a.split('?')[0] === b.split('?')[0];
 export const isRelativeURL = (u) => u && u.length && /^\/[a-zA-Z0-9@\-%_~][/a-zA-Z0-9@\-%_~]*[?]?([^#]*)#?([^#]*)$/.test(u);
 
 export default ({ app }) => {
-    const redirect = (name, noRouter = false) => {
+    function redirect(name, noRouter = false) {
         if (!this.options.redirect) {
             return;
         }
@@ -45,7 +45,7 @@ export default ({ app }) => {
         } else {
             this.ctx.redirect(to, { ...this.ctx.route.query, redirect: from });
         }
-    };
+    }
 
     app.$auth.redirect = redirect.bind(app.$auth);
 };

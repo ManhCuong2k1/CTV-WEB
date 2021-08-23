@@ -8,17 +8,37 @@
             <span>Tải app</span>
         </div>
         <div class="flex items-center">
-            <nuxt-link to="/me/partner/register">
-                Đăng ký thành viên
-            </nuxt-link>
-            <el-divider direction="vertical" />
             <nuxt-link to="/me/agency/register">
                 Đăng ký NCC
             </nuxt-link>
             <el-divider direction="vertical" />
-            <nuxt-link to="/login">
+            <el-button v-if="isLoggedIn" class="p-0" type="text" @click="signOut">
+                <span class="text-white">Đăng xuất</span>
+            </el-button>
+            <nuxt-link v-else to="/login">
                 Đăng nhập
             </nuxt-link>
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        computed: {
+            isLoggedIn() {
+                return this.$auth.loggedIn;
+            },
+
+            auth() {
+                return this.$auth.user;
+            },
+        },
+
+        methods: {
+            async signOut() {
+                await this.$auth.logout();
+                this.$router.push('/');
+            },
+        },
+    };
+</script>
