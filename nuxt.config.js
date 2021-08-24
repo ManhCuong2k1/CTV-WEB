@@ -13,8 +13,6 @@ import {
 } from './env/nuxt';
 
 export default {
-    ssr: false,
-
     telemetry: false,
 
     head: {
