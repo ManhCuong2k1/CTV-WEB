@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="bg-white py-2 px-2 sm:px-0">
-            <Banner class="index-section" />
+            <Banner class="index-section" :banners="banners" />
         </div>
 
         <div class="bg-white py-6">
@@ -21,7 +21,7 @@
                         Xem tất cả <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
-                <ProductsCarousel :products="products" />
+                <ProductsCarousel :products="newProducts" />
             </div>
         </div>
 
@@ -36,7 +36,7 @@
                     class="flex justify-start items-center mb-2 py-5 px-3 bg-white rounded-md"
                 >
                     <div class="w-12">
-                        <i :class="`${benefit.icon} text-2xl pr-4`" />
+                        <i :class="`${benefit.icon} text-2xl pr-4 pl-2`" />
                     </div>
                     <div>
                         <div class="font-bold">
@@ -72,7 +72,7 @@
                         Xem tất cả <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
-                <ProductsCarousel :products="products" />
+                <ProductsCarousel :products="hotProducts" />
             </div>
         </div>
 
@@ -98,18 +98,14 @@
                         Xem tất cả <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
-                <el-row :gutter="0">
-                    <el-col
-                        v-for="index in 12"
-                        :key="index"
-                        :xs="12"
-                        :sm="8"
-                        :md="6"
-                        :lg="4"
-                    >
-                        <ProductItem :product="products[0]" class="p-1" />
-                    </el-col>
-                </el-row>
+                <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                    <ProductItem
+                        v-for="product in discountProducts"
+                        :key="product.id"
+                        :product="product"
+                        class="p-1"
+                    />
+                </div>
                 <div class="flex justify-center mt-4">
                     <el-button type="primary" size="medium">
                         <span class="md:px-48">Xem tất cả</span>
@@ -118,15 +114,17 @@
             </div>
         </div>
 
-        <div class="py-6">
+        <div v-if="!isLoggedIn" class="py-6">
             <div class="index-section flex flex-col justify-center items-center">
                 <div class="text-lg mb-2">
                     Tham gia cộng đồng BATTAY
                 </div>
                 <div class="flex items-center">
-                    <el-button size="medium" type="warning" class="px-4">
-                        ĐĂNG KÝ TÀI KHOẢN
-                    </el-button>
+                    <nuxt-link to="/register">
+                        <el-button size="medium" type="warning" class="px-4">
+                            ĐĂNG KÝ TÀI KHOẢN
+                        </el-button>
+                    </nuxt-link>
                     <el-button type="text" class="ml-2">
                         hoặc <span class="underline">Đăng nhập</span>
                     </el-button>
@@ -138,6 +136,8 @@
 
 <script>
     import { mapState } from 'vuex';
+    import { getSpecList } from '~/api/products';
+    import { getAll as getBanners } from '~/api/banners';
     import Banner from '~/components/layout/Banner.vue';
     import CategoriesCarousel from '~/components/categories/Carousel.vue';
     import ProductsCarousel from '~/components/products/Carousel.vue';
@@ -155,10 +155,21 @@
             UsersCarousel,
         },
 
-        async asyncData({ store }) {
+        async asyncData({ store, params }) {
             await store.dispatch('categories/getCategories');
-            await store.dispatch('products/getProducts');
             await store.dispatch('users/getUsers');
+
+            const { data: newProducts } = await getSpecList('new', params);
+            const { data: hotProducts } = await getSpecList('hot', params);
+            const { data: discountProducts } = await getSpecList('discount', params);
+            const { data: banners } = await getBanners();
+
+            return {
+                banners,
+                newProducts,
+                hotProducts,
+                discountProducts,
+            };
         },
 
         data: () => ({
@@ -179,6 +190,9 @@
 
         computed: {
             ...mapState('products', ['products']),
+            isLoggedIn() {
+                return this.$auth.loggedIn;
+            },
         },
     };
 </script>

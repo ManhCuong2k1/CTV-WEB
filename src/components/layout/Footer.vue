@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col justify-center items-center bg-white py-4">
+    <div class="flex flex-col justify-center items-center border-t bg-white py-4">
         <div>
             <span>Giới thiệu</span>
             <el-divider direction="vertical" />

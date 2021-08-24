@@ -1,10 +1,10 @@
 <template>
     <nuxt-link :to="`/c/${category.slug}`" class="flex flex-col items-center">
         <div class="rounded-3xl w-24 h-24 mb-2 bg-blue-200 flex justify-center flex-col">
-            <img class="w-20 mx-auto" src="https://i0.wp.com/s1.uphinh.org/2021/08/23/sim-den-trang-1.png">
+            <img class="w-20 mx-auto" :src="category.avatar">
         </div>
-        <div class="text-center">
-            Sim số đẹp
+        <div class="text-center truncate">
+            {{ category.name }}
         </div>
     </nuxt-link>
 </template>

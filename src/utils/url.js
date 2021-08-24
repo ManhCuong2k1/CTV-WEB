@@ -1,6 +1,6 @@
 export const baseUrl = process.browser ? `${window.location.protocol}//${window.location.host}` : process.env.APP_URL;
 
-export function image(imageItem, size) {
+export function image(imageItem, size = 'full') {
     if (imageItem) {
         if (!imageItem.includes('http')) {
             return size

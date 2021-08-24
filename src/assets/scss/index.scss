@@ -14,6 +14,9 @@ body {
 .el-loading-spinner {
     @apply flex justify-center items-center;
 }
+.content-section {
+    @apply mx-auto max-w-screen-xl;
+}
 .color-primary {
     color: #49b5d8;
 }
