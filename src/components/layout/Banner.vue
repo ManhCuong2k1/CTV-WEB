@@ -1,25 +1,34 @@
 <template>
-    <div>
-        <swiper :options="swiperOption" class="rounded-md">
-            <swiper-slide v-for="(category, index) in categories" :key="index">
-                <img src="https://i0.wp.com/s1.uphinh.org/2021/08/23/8010020e9c360f0ba9b3969bbc7499c3-2.png">
-            </swiper-slide>
-        </swiper>
-    </div>
+    <swiper :options="swiperOption" class="rounded-md" style="height: 400px;">
+        <swiper-slide v-for="banner in banners" :key="banner.id">
+            <img :src="getImage(banner.image)">
+        </swiper-slide>
+    </swiper>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { image as getImage } from '~/utils/url';
 
     export default {
+        props: {
+            banners: {
+                type: Array,
+                required: true,
+            },
+        },
+
         data: () => ({
             swiperOption: {
                 slidesPerView: 1,
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                },
             },
         }),
 
-        computed: {
-            ...mapState('categories', ['categories']),
+        methods: {
+            getImage,
         },
     };
 </script>

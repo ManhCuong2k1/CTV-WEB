@@ -168,8 +168,8 @@
                             this.loading = true;
                             await this.$auth.loginWith('local', {
                                 data: {
-                                    phone: this.phone,
-                                    password: this.password,
+                                    phone: this.form.phone,
+                                    password: this.form.password,
                                     user: 'user',
                                 },
                             });

@@ -4,7 +4,7 @@
             <swiper-slide v-for="(image, index) in product.images" :key="index">
                 <el-image
                     style="width: 100%; aspect-ratio: 5/6"
-                    :src="image"
+                    :src="image.url"
                     :preview-src-list="product.images"
                     fit="fill"
                 />
@@ -15,7 +15,7 @@
             <swiper-slide v-for="(image, index) in product.images" :key="index">
                 <el-image
                     style="width: 100%; aspect-ratio: 5/6"
-                    :src="image"
+                    :src="image.url"
                     fit="fill"
                 />
             </swiper-slide>

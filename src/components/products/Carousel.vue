@@ -1,7 +1,7 @@
 <template>
     <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(product, index) in products" :key="index">
-            <Item :product="product" />
+        <swiper-slide v-for="(product, index) in products" :key="index" class="h-full">
+            <Item :product="product" class="h-full" />
         </swiper-slide>
         <div slot="pagination" class="swiper-pagination" />
     </swiper>
@@ -56,7 +56,7 @@
                     prevEl: '.el-icon-arrow-right',
                 },
                 autoplay: {
-                    delay: 3000,
+                    delay: 30000,
                     pauseOnMouseEnter: true,
                     disableOnInteraction: false,
                 },

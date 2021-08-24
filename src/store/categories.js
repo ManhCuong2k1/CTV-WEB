@@ -8,7 +8,7 @@ const actions = {
     async getCategories({ commit }) {
         const categories = await getAll();
 
-        commit('setCategories', categories);
+        commit('setCategories', categories.data);
     },
 };
 

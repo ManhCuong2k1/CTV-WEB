@@ -2,11 +2,11 @@
     <div>
         <el-row :gutter="10" class="flex items-center">
             <el-col :xs="6" :sm="4">
-                <div>
+                <nuxt-link to="/">
                     <div class="text-3xl font-bold tracking-wider">
                         Battay
                     </div>
-                </div>
+                </nuxt-link>
             </el-col>
             <el-col :xs="12" :sm="16">
                 <Search />
