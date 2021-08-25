@@ -16,11 +16,11 @@ export default {
     telemetry: false,
 
     head: {
-        title: process.env.npm_package_name || '',
+        title: 'Battay.vn',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+            { hid: 'description', name: 'description', content: 'Battay.vn' },
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/images/logo.svg' },

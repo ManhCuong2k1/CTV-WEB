@@ -1,5 +1,5 @@
 <template>
-    <swiper :options="swiperOption" class="rounded-md" style="height: 400px;">
+    <swiper :options="swiperOption" class="rounded-md">
         <swiper-slide v-for="banner in banners" :key="banner.id">
             <img :src="getImage(banner.image)">
         </swiper-slide>

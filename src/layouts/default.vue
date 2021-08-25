@@ -56,7 +56,7 @@
         },
 
         head: () => ({
-            title: 'CTV Pro',
+            title: 'Battay - Kinh doanh không cần vốn',
         }),
     };
 </script>
