@@ -1,24 +1,26 @@
 <template>
     <ContentView :links="navbarLinks">
         <div class="bg-white py-4">
-            <AgencyItem class="content-container" :agency="agency" />
-        </div>
-
-        <div class="bg-white py-4 mt-2">
-            <div class="content-container">
-                <div class="text-lg font-bold mb-1">
-                    <i class="fas fa-bolt mr-1 text-yellow-400" />Sản phẩm bán chạy
-                </div>
-                <ProductCarousel :products="agency.products" />
+            <div class="content-section">
+                <AgencyItem :agency="agency" />
             </div>
         </div>
 
-        <div class="py-2 mt-2">
-            <div class="content-container flex justify-between">
-                <CategoryMenu :categories="agency.categories" />
+        <div class="bg-white py-4 mt-4">
+            <div class="content-section">
+                <div class="text-lg font-bold mb-1">
+                    <i class="fas fa-bolt mr-1 text-yellow-400" />Sản phẩm mới
+                </div>
+                <ProductCarousel :products="newProducts" />
+            </div>
+        </div>
+
+        <div>
+            <div class="content-section flex justify-between">
+                <CategoryMenu :categories="categories" class="mt-12 mr-2" />
                 <div class="flex-grow">
-                    <div class="flex justify-between items-center mb-2">
-                        <span>{{ 1234 | formatNumber }} sản phẩm</span>
+                    <div class="flex justify-between items-center h-12">
+                        <span>{{ products.length | formatNumber }} sản phẩm</span>
                         <div class="flex items-center">
                             <SelectFilter
                                 query="sort"
@@ -35,15 +37,20 @@
                         </div>
                     </div>
                     <div class="bg-white p-2">
-                        <div :class="{'grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5' : isGridLayout}">
-                            <div v-for="(product, index) in agency.products" :key="index">
-                                <ProductItem :is-grid="isGridLayout" :product="product" class="p-1" />
+                        <div v-if="products.length > 0">
+                            <div :class="{'grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5' : isGridLayout}">
+                                <div v-for="(product, index) in products" :key="index">
+                                    <ProductItem :is-grid="isGridLayout" :product="product" class="p-1" />
+                                </div>
+                            </div>
+                            <div class="flex justify-center mt-4">
+                                <el-button type="primary" size="small" round>
+                                    <span class="px-36">Xem thêm</span>
+                                </el-button>
                             </div>
                         </div>
-                        <div class="flex justify-center mt-4">
-                            <el-button type="primary" size="small" round>
-                                <span class="px-36">Xem thêm</span>
-                            </el-button>
+                        <div v-else>
+                            <el-empty description="Không có sản phẩm nào" />
                         </div>
                     </div>
                 </div>
@@ -53,7 +60,9 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { getAgency } from '~/api/agencies';
+    import { getAll as getCategories } from '~/api/categories';
+    import { getAll as getProducts } from '~/api/products';
     import AgencyItem from '~/components/agencies/Item.vue';
     import CategoryMenu from '~/components/categories/Menu.vue';
     import ContentView from '~/components/layout/View.vue';
@@ -71,8 +80,23 @@
             SelectFilter,
         },
 
-        async asyncData({ store }) {
-            await store.dispatch('agencies/getAgency', 1);
+        async asyncData({ query, params }) {
+            const { data: agency } = await getAgency(params.id);
+            const { data: categories } = await getCategories();
+            const { data: newProducts } = await getProducts({
+                distributorId: params.id,
+            });
+            const { data: products } = await getProducts({
+                distributorId: params.id,
+                categoryId: query.categoryId,
+            });
+
+            return {
+                agency,
+                categories,
+                products,
+                newProducts,
+            };
         },
 
         data: () => ({
@@ -90,8 +114,6 @@
         }),
 
         computed: {
-            ...mapState('agencies', ['agency']),
-
             navbarLinks() {
                 return [
                     { title: 'Trang chủ', link: '/' },
@@ -105,5 +127,7 @@
                 this.isGridLayout = !this.isGridLayout;
             },
         },
+
+        watchQuery: true,
     };
 </script>

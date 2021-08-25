@@ -1,6 +1,6 @@
 <template>
     <nuxt-link :to="`/agencies/${agency.id}`" class="bg-gray-200 rounded-md p-3">
-        <div class="flex items-center mb-2">
+        <div class="flex items-center">
             <nuxt-link :to="`/agencies/${agency.id}`" class="mr-4">
                 <el-avatar :src="agency.avatar" :size="50" icon="el-icon-user-solid" />
             </nuxt-link>
@@ -23,6 +23,8 @@
                 <el-image
                     :src="agency.products[index].image"
                     fit="fill"
+                    style="aspect-ratio: 1/1"
+                    class="rounded-md"
                 >
                     <div slot="error" class="image-slot">
                         <i class="el-icon-picture-outline text-lg" />

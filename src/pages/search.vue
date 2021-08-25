@@ -1,8 +1,8 @@
 <template>
-    <ContentView :links="navbarLinks" class="content-container flex justify-between items-start mb-2">
-        <CategoriesMenu :categories="categories" title="Tìm theo danh mục" class="mt-3" />
+    <ContentView :links="navbarLinks" class="content-section flex justify-between items-start mb-2">
+        <CategoriesMenu :categories="categories" title="Tìm theo danh mục" class="mt-12 mr-2" />
         <div class="flex-grow flex flex-col">
-            <div class="flex justify-between items-center mb-2">
+            <div class="flex justify-between items-center h-12">
                 <span>{{ 1234 | formatNumber }} kết quả tìm kiếm cho '{{ searchQuery }}'</span>
                 <div class="flex items-center">
                     <SelectFilter
@@ -35,7 +35,7 @@
                 <el-tab-pane label="Nhà cung cấp" name="agencies" class="p-4">
                     <div class="grid xs:grid-cols-1 md:grid-cols-2 gap-4">
                         <div v-for="index in 6" :key="index">
-                            <AgencyItem :agency="agencies[0]" class="p-1" />
+                            <AgencyItem :agency="agencies[0]" />
                         </div>
                     </div>
                     <div class="flex justify-center mt-4 mb-2">
@@ -51,6 +51,7 @@
 
 <script>
     import { mapState } from 'vuex';
+    import { getProducts, getDistributors } from '~/api/search';
     import AgencyItem from '~/components/agencies/SearchItem.vue';
     import CategoriesMenu from '~/components/categories/Menu.vue';
     import ContentView from '~/components/layout/View.vue';
@@ -66,10 +67,17 @@
             SelectFilter,
         },
 
-        async asyncData({ store }) {
+        async asyncData({ store, query }) {
             await store.dispatch('agencies/getAgencies');
             await store.dispatch('categories/getCategories');
-            await store.dispatch('products/getProducts');
+
+            const { data: products } = await getProducts(query);
+            const { data: distributors } = await getDistributors(query);
+
+            return {
+                products,
+                distributors,
+            };
         },
 
         data: () => ({
@@ -109,6 +117,8 @@
                 this.isGridLayout = !this.isGridLayout;
             },
         },
+
+        watchQuery: true,
     };
 </script>
 

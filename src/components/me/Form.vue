@@ -1,19 +1,17 @@
 <template>
     <el-form
         ref="form"
+        v-loading="loading"
         :model="form"
         :rules="rules"
         label-position="left"
         label-width="150px"
     >
         <el-form-item label="Họ & tên">
-            <el-input v-model="form.fullName" placeholder="Nhập họ và tên" />
-        </el-form-item>
-        <el-form-item label="Email" prop="email">
-            <el-input v-model="form.email" placeholder="Nhập email" />
+            <el-input v-model="form.fullname" placeholder="Nhập họ và tên" />
         </el-form-item>
         <el-form-item label="Số điện thoại" prop="phone">
-            <el-input v-model="form.phone" placeholder="Nhập số điện thoại" />
+            <el-input v-model="form.phone" readonly placeholder="Nhập số điện thoại" />
         </el-form-item>
         <el-form-item label="Mật khẩu" prop="password">
             <el-button v-if="!isChangePassword" @click="setChangePassword">
@@ -40,8 +38,52 @@
                 :show-password="true"
             />
         </el-form-item>
+        <el-form-item label="Địa chỉ">
+            <el-row :gutter="0">
+                <el-col :xs="24" :sm="12">
+                    <el-form-item prop="CityId">
+                        <el-select
+                            v-model="form.CityId"
+                            class="w-full"
+                            placeholder="Tính/Thành phố"
+                            @change="setDistrictData"
+                        >
+                            <el-option
+                                v-for="city in infoGeo"
+                                :key="city.id"
+                                :value="city.id"
+                                :label="city.name"
+                            />
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+                <el-col :xs="24" :sm="12" class="mt-2 md:mt-0 md:pl-2">
+                    <el-form-item prop="DistrictId">
+                        <el-select
+                            v-model="form.DistrictId"
+                            class="w-full"
+                            placeholder="Quận/Huyện"
+                            no-data-text="Chọn Tỉnh/Thành phố trước"
+                        >
+                            <el-option
+                                v-for="district in districts"
+                                :key="district.id"
+                                :value="district.id"
+                                :label="district.name"
+                            />
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+        </el-form-item>
+        <el-form-item prop="address">
+            <el-input
+                v-model="form.address"
+                placeholder="Địa chỉ chi tiết"
+            />
+        </el-form-item>
         <el-form-item>
-            <el-button type="primary">
+            <el-button type="primary" @click="submit">
                 Lưu
             </el-button>
         </el-form-item>
@@ -49,14 +91,29 @@
 </template>
 
 <script>
+    import _find from 'lodash/find';
     import _cloneDeep from 'lodash/cloneDeep';
+    import systemMixin from '~/mixins/system';
 
     export default {
+        mixins: [systemMixin],
+
+        props: {
+            loading: {
+                type: Boolean,
+                default: false,
+            },
+        },
+
         data() {
+            const authUser = this.$auth.user;
+
             const form = {
-                fullName: '',
-                email: '',
-                phone: '',
+                fullname: authUser.name,
+                phone: authUser.phone,
+                address: authUser.address,
+                CityId: authUser.CityId,
+                DistrictId: authUser.DistrictId,
             };
 
             const validatePhoneNumber = (rule, value, callback) => {
@@ -81,11 +138,35 @@
             return {
                 form,
                 rules,
+                districts: [],
+                infoGeo: null,
                 isChangePassword: false,
             };
         },
 
+        computed: {
+            authUser() {
+                return this.$auth.user;
+            },
+        },
+
+        async mounted() {
+            await this.fetData();
+            this.setDistrictData(this.$auth.user.CityId);
+        },
+
         methods: {
+            async fetData() {
+                this.infoGeo = await this.getInfoGeo();
+            },
+
+            setDistrictData(cityId) {
+                this.districts = _find(this.infoGeo, (city) => city.id === cityId)?.Districts;
+                this.form.DistrictId = _find(this.districts, (district) => district.id === this.authUser.DistrictId)
+                    ? this.authUser.DistrictId
+                    : null;
+            },
+
             setChangePassword() {
                 const validatePassword = (rule, value, callback) => {
                     if (value === '') {
@@ -118,6 +199,14 @@
                 this.rules.passwordConfirmation = [];
                 delete this.form.password;
                 delete this.form.passwordConfirmation;
+            },
+
+            submit() {
+                this.$refs.form.validate(async (valid) => {
+                    if (valid) {
+                        this.$emit('save', this.form);
+                    }
+                });
             },
         },
     };

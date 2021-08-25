@@ -1,37 +1,31 @@
 <template>
-    <div class="min-h-screen relative">
-        <div class="bg-ctv">
-            <SubHeader class="max-w-screen-xl mx-auto text-white text-sm z-30 py-1" />
-        </div>
+    <div class="flex flex-col min-h-screen relative bg-gray-100">
         <div class="bg-ctv hidden py-2 sm:block sm:w-full sticky top-0 z-30">
-            <Header class="max-w-screen-xl mx-auto text-white" />
+            <Header class="content-section text-white" />
         </div>
-        <el-breadcrumb v-if="breadcrumb.length" class="mx-auto lg:w-8/12 py-2" separator-class="el-icon-arrow-right">
-            <transition-group name="breadcrumb">
-                <el-breadcrumb-item
-                    v-for="item in breadcrumb"
-                    :key="item.link"
-                    :to="item.link"
-                    class="text-xs"
-                >
-                    {{ item.title }}
-                </el-breadcrumb-item>
-            </transition-group>
-        </el-breadcrumb>
-        <div>
-            <div>
-                <div class="main-content bg-gray-100 -p-5">
-                    <nuxt />
-                    <el-backtop target=".main-content" />
-                </div>
-            </div>
+        <div class="content-section w-full my-1">
+            <el-breadcrumb v-if="breadcrumb.length" separator-class="el-icon-arrow-right">
+                <transition-group name="breadcrumb">
+                    <el-breadcrumb-item
+                        v-for="item in breadcrumb"
+                        :key="item.link"
+                        :to="item.link"
+                        class="text-xs"
+                    >
+                        {{ item.title }}
+                    </el-breadcrumb-item>
+                </transition-group>
+            </el-breadcrumb>
         </div>
-        <Footer />
+        <div class="flex-grow main-content -p-5">
+            <nuxt />
+            <el-backtop target=".main-content" />
+        </div>
+        <Footer class="mt-2" />
     </div>
 </template>
 
 <script>
-    import SubHeader from '~/components/layout/SubHeader.vue';
     import Header from '~/components/layout/Header.vue';
     import Footer from '~/components/layout/Footer.vue';
 
@@ -39,7 +33,6 @@
         components: {
             Header,
             Footer,
-            SubHeader,
         },
 
         data: () => ({
@@ -50,6 +43,10 @@
             return {
                 setBreadcrumb: this.setBreadcrumb,
             };
+        },
+
+        mounted() {
+            this.breadcrumb = [];
         },
 
         methods: {

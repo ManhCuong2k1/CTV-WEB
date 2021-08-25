@@ -1,5 +1,6 @@
 import axios from '~/libs/axios';
 
+export const getCurrent = () => axios.get('/app/users/me').then((_) => _.data);
 export const checkPhone = (phone) => axios.post('/auth-user/checkphone', { phone }).then((_) => _.data);
 export const verifyOtp = (phone, otp) => axios.post('/auth-user/otp/verify', { phone, otp }).then((_) => _.data);
 export const update = (data) => axios.post('/auth-user/update', data).then((_) => _.data);

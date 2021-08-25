@@ -24,20 +24,19 @@
                 <div class="text-red-500 text-lg font-bold">{{ product.price - product.promotionPrice | formatNumber }}₫</div>
             </div>
             <div class="flex justify-between items-center text-xs mb-4">
-                <div class="flex justify-between items-center flex-grow">
-                    <div>Bán lẻ:</div>
-                    <div v-if="isLoggedIn">{{ product.price | formatNumber }}₫</div>
-                    <div v-else>******</div>
+                <div>Bán lẻ:</div>
+                <div v-if="isLoggedIn">
+                    {{ product.price | formatNumber }}₫
                 </div>
-
-                <el-tag
-                    v-if="!isLoggedIn"
-                    type="danger"
-                    effect="plain"
-                    size="mini"
-                >
-                    <span class="text-xs">Đăng ký TV để xem giá</span>
-                </el-tag>
+                <nuxt-link v-else to="/login">
+                    <el-tag
+                        type="danger"
+                        effect="plain"
+                        size="mini"
+                    >
+                        <span class="text-xs">Đăng ký TV để xem giá</span>
+                    </el-tag>
+                </nuxt-link>
             </div>
         </div>
     </nuxt-link>

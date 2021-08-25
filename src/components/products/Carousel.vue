@@ -1,10 +1,13 @@
 <template>
-    <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(product, index) in products" :key="index" class="h-full">
-            <Item :product="product" class="h-full" />
-        </swiper-slide>
-        <div slot="pagination" class="swiper-pagination" />
-    </swiper>
+    <div>
+        <swiper v-if="products.length" class="swiper" :options="swiperOption">
+            <swiper-slide v-for="(product, index) in products" :key="index" class="h-full">
+                <Item :product="product" class="h-full" />
+            </swiper-slide>
+            <div slot="pagination" class="swiper-pagination" />
+        </swiper>
+        <el-empty v-else description="Trống" />
+    </div>
 </template>
 
 <script>

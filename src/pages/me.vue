@@ -1,8 +1,8 @@
 <template>
-    <ContentView :links="navbarLinks">
-        <div class="content-container flex justify-between bg-white mb-4">
-            <Sidebar />
-            <div class="flex-grow m-4">
+    <ContentView :links="navbarLinks" class="h-full">
+        <div class="content-section flex justify-between mb-4">
+            <Sidebar class="bg-white px-2 py-4 mr-2 mt-0" />
+            <div class="bg-white flex-grow p-4">
                 <nuxt-child />
             </div>
         </div>

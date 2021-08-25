@@ -125,9 +125,14 @@
                             ĐĂNG KÝ TÀI KHOẢN
                         </el-button>
                     </nuxt-link>
-                    <el-button type="text" class="ml-2">
-                        hoặc <span class="underline">Đăng nhập</span>
-                    </el-button>
+                    <div class="flex ml-2">
+                        hoặc
+                        <el-link type="primary" class="ml-2">
+                            <nuxt-link to="/login">
+                                Đăng nhập
+                            </nuxt-link>
+                        </el-link>
+                    </div>
                 </div>
             </div>
         </div>
