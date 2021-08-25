@@ -54,7 +54,13 @@
             <AgencyItem :agency="product.agency" />
         </div>
         <div class="content-section bg-white mt-2 p-2">
-            {{ product.description }}
+            <div class="font-bold text-lg">
+                Mô tả sản phẩm
+            </div>
+            <div v-if="product.content" v-html="product.content"/>
+            <div v-else class="text-center">
+                [Trống]
+            </div>
         </div>
         <div class="content-section bg-white mt-2 p-2">
             <div class="font-bold text-lg mb-2">Cùng nhà cung cấp</div>

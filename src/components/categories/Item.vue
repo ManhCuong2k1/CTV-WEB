@@ -1,5 +1,5 @@
 <template>
-    <nuxt-link :to="`/c/${category.slug}`" class="flex flex-col items-center">
+    <nuxt-link :to="`/category/${category.id}`" class="flex flex-col items-center">
         <div class="rounded-3xl w-24 h-24 mb-2 bg-blue-200 flex justify-center flex-col">
             <img class="w-20 mx-auto" :src="category.avatar">
         </div>

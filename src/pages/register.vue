@@ -121,7 +121,7 @@
                                 </el-form-item>
                             </el-col>
                             <el-col :xs="24" :sm="12">
-                                <el-form-item prop="CityId">
+                                <el-form-item prop="DistrictId">
                                     <el-select v-model="form.DistrictId" placeholder="Quận/Huyện" no-data-text="Chọn Tỉnh/Thành phố trước">
                                         <el-option
                                             v-for="district in districts"
