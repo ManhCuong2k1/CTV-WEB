@@ -110,7 +110,7 @@
                 </div>
                 <div v-if="product.content.length > 500 && showContent == false">
                     <div class="max-h-40 overflow-hidden">
-                        <div v-html="product.content" />
+                        <div>{{ product.content }}</div>
                     </div>
                     <div
                         class="text-center text-yellow-600 h-10 leading-10 hover:cursor-pointer"
@@ -121,7 +121,7 @@
                 </div>
                 <div v-if="showContent == true">
                     <div>
-                        <div v-html="product.content" />
+                        <div>{{ product.content }}</div>
                     </div>
                     <div
                         class="text-center text-yellow-600 h-10 leading-10 hover:cursor-pointer"

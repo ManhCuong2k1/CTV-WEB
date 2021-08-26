@@ -39,6 +39,7 @@
     "tailwindcss": "^2.1.2",
     "tinymce": "^4",
     "vue-awesome-swiper": "^4.1.1",
+    "vue-infinite-loading": "^2.4.5",
     "vuex-persistedstate": "^3"
   },
   "devDependencies": {
