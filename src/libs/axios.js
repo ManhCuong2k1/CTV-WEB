@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: process.env.API_HOST + process.env.API_PATH,
+    baseURL: process.env.API_HOST,
     headers: {
         'content-type': 'application/json',
     },
@@ -22,7 +22,7 @@ if (process.browser === true) {
         config.headers.Authorization = decodeURI(token);
         return config;
     });
-    instance.defaults.baseURL = process.env.API_HOST + process.env.API_PATH;
+    instance.defaults.baseURL = process.env.APP_URL + process.env.API_PATH;
 }
 
 export default instance;
