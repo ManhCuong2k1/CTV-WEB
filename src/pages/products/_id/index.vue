@@ -30,17 +30,47 @@
                                 Lợi nhuận: <span class="text-red-500 font-bold text-xl">{{ product.price - product.promotionPrice | formatNumber }}₫</span>
                             </div>
                             <div class="text-sm text-right">
-                                <div>
-                                    Giá bán lẻ tham khảo: <span class="text-red-500 text-xl">{{ product.price | formatNumber }}₫</span>
+                                <div class="flex justify-end items-center">
+                                    Giá bán lẻ tham khảo:
+                                    <span v-if="isLoggedIn" class="text-red-500 text-xl">
+                                        {{ product.price | formatNumber }}₫
+                                    </span>
+                                    <nuxt-link v-else to="/login" class="ml-2">
+                                        <el-tag
+                                            type="danger"
+                                            effect="plain"
+                                            size="mini"
+                                        >
+                                            <span class="text-xs">Đăng ký TV để xem giá</span>
+                                        </el-tag>
+                                    </nuxt-link>
                                 </div>
-                                <div>
-                                    Giá Thành viên: <span class="text-red-500 text-xl">{{ product.promotionPrice | formatNumber }}₫</span>
+                                <div class="flex justify-end items-center mt-2">
+                                    Giá Thành viên:
+                                    <span v-if="isLoggedIn" class="text-red-500 text-xl">
+                                        {{ product.promotionPrice | formatNumber }}₫
+                                    </span>
+                                    <nuxt-link v-else to="/login" class="ml-2">
+                                        <el-tag
+                                            type="danger"
+                                            effect="plain"
+                                            size="mini"
+                                        >
+                                            <span class="text-xs">Đăng ký TV để xem giá</span>
+                                        </el-tag>
+                                    </nuxt-link>
                                 </div>
                             </div>
                         </div>
                         <div class="mt-12">
                             <span class="mr-4">SỐ LƯỢNG: </span>
-                            <el-input-number v-model="quantity" size="small" :min="1" />
+                            <el-input-number
+                                v-model="quantity"
+                                size="small"
+                                :min="1"
+                                :max="product.volume"
+                            />
+                            <span class="ml-2 text-gray-500">(Còn lại {{ product.volume | formatNumber }} sản phẩm)</span>
                         </div>
                         <div class="flex justify-start items-center flex-wrap mt-4">
                             <el-button size="medium" @click="copyContent">
@@ -53,9 +83,13 @@
                                     <i class="el-icon-download text-lg mr-1" /> Tải ảnh
                                 </div>
                             </el-button>
-                            <el-button type="danger" size="medium">
+                            <el-button
+                                type="danger"
+                                size="medium"
+                                @click="addCart"
+                            >
                                 <div class="flex items-center">
-                                    <i class="el-icon-shopping-cart-1 text-lg mr-1" @click="addCart"> Thêm vào giỏ hàng
+                                    <i class="el-icon-shopping-cart-1 text-lg mr-1"> Thêm vào giỏ hàng
                                     </i>
                                 </div>
                             </el-button>
@@ -166,15 +200,22 @@
 
         computed: {
             ...mapState('products', ['products']),
+            isLoggedIn() {
+                return this.$auth.loggedIn;
+            },
         },
 
         methods: {
             async addCart() {
-                await this.$store.commit('cart/addToCart', {
-                    productId: this.product.id,
-                    amount: this.quantity,
-                });
-                this.$message.success('Thêm sản phẩm vào giỏ hàng thành công');
+                if (this.isLoggedIn) {
+                    await this.$store.commit('cart/addToCart', {
+                        productId: this.product.id,
+                        amount: this.quantity,
+                    });
+                    this.$message.success('Thêm sản phẩm vào giỏ hàng thành công');
+                } else {
+                    this.$message.warning('Vui lòng đăng nhập để thực hiện chức năng này');
+                }
             },
 
             copyContent() {
