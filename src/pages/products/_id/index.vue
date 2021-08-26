@@ -6,11 +6,21 @@
                     <ImagePreview :product="product" />
                 </el-col>
                 <el-col :xs="24" :sm="14">
-                    <div class="font-bold text-lg">
+                    <div class="font-bold text-2xl">
                         {{ product.name }}
                     </div>
-                    <div class="text-xs">
-                        Mã SP: <span class="font-bold">{{ product.id }}</span>
+                    <div class="text-sm flex justify-between items-center mb-1">
+                        <div>
+                            Mã SP: <span class="font-bold">{{ product.id }}</span>
+                        </div>
+                        <div>
+                            <div v-if="product.note">
+                                {{ product.note }}
+                            </div>
+                            <div v-else>
+                                Giao hàng trong vòng 1 đến 3 ngày
+                            </div>
+                        </div>
                     </div>
                     <el-divider class="m-0" />
                     <div class="flex justify-between flex-wrap mt-4">
@@ -31,18 +41,18 @@
                         <el-input-number v-model="quantity" size="small" :min="1" />
                     </div>
                     <div class="flex justify-start items-center flex-wrap mt-4">
-                        <el-button type="danger" size="medium">
-                            <div class="flex items-center">
+                        <el-button class="flex-grow" type="danger" size="medium" @click="addCart">
+                            <div class="flex justify-center items-center">
                                 <i class="el-icon-shopping-cart-1 text-lg mr-1" /> Thêm vào giỏ hàng
                             </div>
                         </el-button>
-                        <el-button size="medium">
-                            <div class="flex items-center">
+                        <el-button class="flex-grow" size="medium">
+                            <div class="flex justify-center items-center">
                                 <i class="el-icon-document-copy text-lg mr-1" /> Sao chép
                             </div>
                         </el-button>
-                        <el-button type="primary" size="medium">
-                            <div class="flex items-center">
+                        <el-button class="flex-grow" type="primary" size="medium">
+                            <div class="flex justify-center items-center">
                                 <i class="el-icon-download text-lg mr-1" /> Tải ảnh
                             </div>
                         </el-button>
@@ -53,14 +63,8 @@
         <div class="content-section bg-white p-4 mt-2">
             <AgencyItem :agency="product.agency" />
         </div>
-        <div class="content-section bg-white mt-2 p-2">
-            <div class="font-bold text-lg">
-                Mô tả sản phẩm
-            </div>
-            <div v-if="product.content" v-html="product.content"/>
-            <div v-else class="text-center">
-                [Trống]
-            </div>
+        <div v-if="product.content" class="content-section bg-white mt-2 p-2">
+            <div v-html="product.content"/>
         </div>
         <div class="content-section bg-white mt-2 p-2">
             <div class="font-bold text-lg mb-2">Cùng nhà cung cấp</div>
@@ -120,6 +124,16 @@
                     { title: 'Tiện ích - Gia dụng', link: '/' },
                     { title: this.product.name, link: '/' },
                 ];
+            },
+        },
+
+        methods: {
+            async addCart() {
+                await this.$store.commit('cart/addToCart', {
+                    productId: this.product.id,
+                    amount: this.quantity,
+                });
+                this.$message.success('Thêm sản phẩm vào giỏ hàng thành công');
             },
         },
     };

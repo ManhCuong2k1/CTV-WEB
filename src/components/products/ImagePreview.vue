@@ -1,6 +1,6 @@
 <template>
     <div>
-        <swiper ref="swiperImages" :options="swiperImageOptions" class="swiper">
+        <swiper ref="swiperImages" :options="swiperImageOptions" class="swiper border">
             <swiper-slide v-for="(image, index) in product.images" :key="index">
                 <el-image
                     style="width: 100%; aspect-ratio: 5/6"
@@ -11,8 +11,8 @@
             </swiper-slide>
             <div slot="pagination" class="swiper-pagination" />
         </swiper>
-        <swiper ref="swiperThumbs" class="swiper" :options="swiperThumbOption">
-            <swiper-slide v-for="(image, index) in product.images" :key="index">
+        <swiper ref="swiperThumbs" class="swiper mt-2" :options="swiperThumbOption">
+            <swiper-slide v-for="(image, index) in product.images" :key="index" class="border">
                 <el-image
                     style="width: 100%; aspect-ratio: 5/6"
                     :src="image.url"
