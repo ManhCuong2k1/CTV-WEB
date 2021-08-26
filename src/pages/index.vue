@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="index-section mt-6 px-2 sm:px-0">
+        <div v-if="!isLoggedIn" class="index-section mt-6 px-2 sm:px-0">
             <div class="font-bold text-xl text-center">
                 Lợi ích thành viên
             </div>
@@ -48,27 +48,28 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center mt-7">
+            <nuxt-link to="/register" class="flex justify-center mt-7">
                 <el-button type="warning" class="mx-auto w-96">
                     ĐĂNG KÝ THÀNH VIÊN
                 </el-button>
+            </nuxt-link>
+        </div>
+
+        <div class="mt-6">
+            <div class="flex items-center mb-2" :class="[isLoggedIn ? 'justify-start' : 'justify-between']">
+                <span class="text-lg font-bold">8.123 Thành viên đang hoạt động</span>
+                <nuxt-link v-if="!isLoggedIn" to="/register" class="text-gray-400">
+                    Đăng ký <i class="el-icon-right" />
+                </nuxt-link>
             </div>
-            <div class="mt-6">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-lg font-bold">8.123 Thành viên đang hoạt động</span>
-                    <nuxt-link to="/products" class="text-gray-400">
-                        Đăng ký <i class="el-icon-right" />
-                    </nuxt-link>
-                </div>
-                <UsersCarousel />
-            </div>
+            <UsersCarousel :users="topUsers" />
         </div>
 
         <div class="bg-white py-6 mt-4 px-2 sm:px-0">
             <div class="index-section">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-lg font-bold text-red-500">Top sản phẩm bán chạy</span>
-                    <nuxt-link to="/products" class="text-gray-400">
+                    <nuxt-link to="/search" class="text-gray-400">
                         Xem tất cả <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
@@ -82,7 +83,7 @@
                     <span class="text-lg text-blue-500 font-bold">
                         <i class="fas fa-chart-line" /> Nhóm hàng dễ bán
                     </span>
-                    <nuxt-link to="/products" class="text-gray-400">
+                    <nuxt-link to="/search" class="text-gray-400">
                         Xem tất cả <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
@@ -94,7 +95,7 @@
             <div class="index-section">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-lg font-bold text-red-500">Giá tốt hôm nay</span>
-                    <nuxt-link to="/products" class="text-gray-400">
+                    <nuxt-link to="/search" class="text-gray-400">
                         Xem tất cả <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
@@ -143,6 +144,7 @@
     import { mapState } from 'vuex';
     import { getSpecList } from '~/api/products';
     import { getAll as getBanners } from '~/api/banners';
+    import { getTopUsers } from '~/api/users';
     import Banner from '~/components/layout/Banner.vue';
     import CategoriesCarousel from '~/components/categories/Carousel.vue';
     import ProductsCarousel from '~/components/products/Carousel.vue';
@@ -162,18 +164,19 @@
 
         async asyncData({ store, params }) {
             await store.dispatch('categories/getCategories');
-            await store.dispatch('users/getUsers');
 
             const { data: newProducts } = await getSpecList('new', params);
             const { data: hotProducts } = await getSpecList('hot', params);
             const { data: discountProducts } = await getSpecList('discount', params);
             const { data: banners } = await getBanners();
+            const { data: topUsers } = await getTopUsers();
 
             return {
                 banners,
                 newProducts,
                 hotProducts,
                 discountProducts,
+                topUsers,
             };
         },
 

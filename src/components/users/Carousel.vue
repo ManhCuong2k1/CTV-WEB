@@ -7,12 +7,15 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
     import Item from './Item.vue';
 
     export default {
         components: {
             Item,
+        },
+
+        props: {
+            users: Array,
         },
 
         data: () => ({
@@ -46,9 +49,5 @@
                 },
             },
         }),
-
-        computed: {
-            ...mapState('users', ['users']),
-        },
     };
 </script>

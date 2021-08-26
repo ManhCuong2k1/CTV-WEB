@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-between items-center border border-white p-4 bg-white rounded-lg">
+    <nuxt-link :to="`/search?categoryId=${category.id}`" class="flex justify-between items-center border border-white p-4 bg-white rounded-lg">
         <div>
             <div class="truncate text-sm">
                 {{ category.name }}
@@ -11,11 +11,11 @@
         <div class="rounded-3xl w-24 h-24 mb-2 bg-blue-200 flex justify-center flex-col">
             <el-image
                 class="w-20 mx-auto"
-                :src="'https://i0.wp.com/s1.uphinh.org/2021/08/23/sim-den-trang-1.png'"
+                :src="category.avatar"
                 fit="fill"
             />
         </div>
-    </div>
+    </nuxt-link>
 </template>
 
 <script>

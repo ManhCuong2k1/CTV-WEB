@@ -242,7 +242,7 @@
         inject: ['setTitle'],
 
         created() {
-            this.setTitle('Đăng ký');
+            // this.setTitle('Đăng ký');
         },
 
         async mounted() {
