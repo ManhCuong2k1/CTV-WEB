@@ -1,6 +1,6 @@
 <template>
     <el-row :gutter="10" class="flex items-center">
-        <el-col :xs="24" :sm="10" class="flex items-center">
+        <el-col :xs="24" :sm="12" class="flex items-center">
             <nuxt-link :to="`/agencies/${agency.id}`" class="mr-4">
                 <el-avatar :src="agency.avatar || defaultAvatar" :size="70" icon="el-icon-user-solid" />
             </nuxt-link>
@@ -13,8 +13,8 @@
                 </div>
             </div>
         </el-col>
-        <el-col :xs="24" :sm="14">
-            <el-descriptions :column="2">
+        <el-col :xs="24" :sm="12">
+            <el-descriptions :column="1">
                 <el-descriptions-item label="Ngày tham gia">
                     <span class="font-bold">{{ agency.createdAt | formatDate('dd/MM/yyyy') }}</span>
                 </el-descriptions-item>

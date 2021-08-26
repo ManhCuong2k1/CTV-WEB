@@ -30,7 +30,7 @@
     </div>
 </template>
 
-// <script>
+<script>
     import { mapState, mapActions } from 'vuex';
     import Dropzone from './Dropzone.vue';
     import { image as toImage } from '~/utils/url';

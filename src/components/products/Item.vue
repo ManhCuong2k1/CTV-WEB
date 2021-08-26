@@ -6,7 +6,7 @@
     >
         <el-image
             :class="[$style['product-item'], !isGrid ? 'w-32' : '']"
-            class="flex justify-center items-center bg-gray-300"
+            class="flex justify-center items-center bg-gray-300 border-b"
             :src="product.avatar"
             fit="fill"
             :autoplay="autoplay"
@@ -70,6 +70,6 @@
 <style lang="scss" module>
     .product-item {
         display: flex !important;
-        aspect-ratio: 11/12;
+        aspect-ratio: 1/1;
     }
 </style>

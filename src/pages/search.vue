@@ -4,7 +4,7 @@
         <CategoriesMenu :categories="categories" title="Tìm theo danh mục" class="mt-12 mr-2" />
         <div class="flex-grow flex flex-col">
             <div class="flex justify-between items-center h-12">
-                <span>{{ 1234 | formatNumber }} kết quả tìm kiếm cho '{{ searchQuery }}'</span>
+                <span>{{ products.length | formatNumber }} kết quả tìm kiếm cho '{{ searchQuery }}'</span>
                 <div class="flex items-center">
                     <SelectFilter
                         query="sort"
@@ -52,7 +52,7 @@
 
 <script>
     import { mapState } from 'vuex';
-    import { getProducts, getDistributors } from '~/api/search';
+    import { getProducts } from '~/api/search';
     import AgencyItem from '~/components/agencies/SearchItem.vue';
     import CategoriesMenu from '~/components/categories/Menu.vue';
     import BreadCrumb from '~/components/layout/BreadCrumb.vue';
@@ -73,11 +73,9 @@
             await store.dispatch('categories/getCategories');
 
             const { data: products } = await getProducts(query);
-            const { data: distributors } = await getDistributors(query);
 
             return {
                 products,
-                distributors,
             };
         },
 
@@ -109,7 +107,7 @@
             },
 
             searchQuery() {
-                return this.$route.query.q;
+                return this.$route.query.keyword;
             },
         },
 

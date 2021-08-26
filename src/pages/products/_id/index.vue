@@ -47,7 +47,8 @@
                             </el-button>
                             <el-button type="danger" size="medium">
                                 <div class="flex items-center">
-                                    <i class="el-icon-shopping-cart-1 text-lg mr-1" /> Thêm vào giỏ hàng
+                                    <i class="el-icon-shopping-cart-1 text-lg mr-1" @click="addCart"> Thêm vào giỏ hàng
+                                    </i>
                                 </div>
                             </el-button>
                         </div>
@@ -157,6 +158,16 @@
 
         computed: {
             ...mapState('products', ['products']),
+        },
+
+        methods: {
+            async addCart() {
+                await this.$store.commit('cart/addToCart', {
+                    productId: this.product.id,
+                    amount: this.quantity,
+                });
+                this.$message.success('Thêm sản phẩm vào giỏ hàng thành công');
+            },
         },
     };
 </script>
