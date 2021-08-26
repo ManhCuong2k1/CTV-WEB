@@ -138,7 +138,7 @@
         inject: ['setTitle'],
 
         created() {
-            this.setTitle('Quên mật khẩu');
+            // this.setTitle('Quên mật khẩu');
         },
 
         methods: {

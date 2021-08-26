@@ -3,7 +3,7 @@
         <BreadCrumb :breadcrumb="navbarLinks" />
         <div class="content-section flex justify-between mb-4">
             <Sidebar class="bg-white px-2 py-4 mr-2 mt-0" />
-            <div class="bg-white flex-grow p-4">
+            <div class="bg-white flex-grow p-6">
                 <nuxt-child />
             </div>
         </div>

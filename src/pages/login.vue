@@ -157,7 +157,7 @@
         inject: ['setTitle'],
 
         created() {
-            this.setTitle('Đăng nhập');
+            // this.setTitle('Đăng nhập');
         },
 
         methods: {
