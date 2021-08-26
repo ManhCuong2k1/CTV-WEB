@@ -1,5 +1,6 @@
 <template>
-    <ContentView :links="navbarLinks">
+    <div :links="navbarLinks">
+        <BreadCrumb :breadcrumb="navbarLinks" />
         <div class="bg-white py-4">
             <div class="content-section">
                 <AgencyItem :agency="agency" />
@@ -56,7 +57,7 @@
                 </div>
             </div>
         </div>
-    </ContentView>
+    </div>
 </template>
 
 <script>
@@ -65,7 +66,7 @@
     import { getAll as getProducts } from '~/api/products';
     import AgencyItem from '~/components/agencies/Item.vue';
     import CategoryMenu from '~/components/categories/Menu.vue';
-    import ContentView from '~/components/layout/View.vue';
+    import BreadCrumb from '~/components/layout/BreadCrumb.vue';
     import ProductCarousel from '~/components/products/Carousel.vue';
     import ProductItem from '~/components/products/Item.vue';
     import SelectFilter from '~/components/filters/Select.vue';
@@ -74,7 +75,7 @@
         components: {
             AgencyItem,
             CategoryMenu,
-            ContentView,
+            BreadCrumb,
             ProductCarousel,
             ProductItem,
             SelectFilter,

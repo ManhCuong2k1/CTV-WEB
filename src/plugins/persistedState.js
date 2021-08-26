@@ -4,13 +4,16 @@ import cookie from 'cookie';
 
 export default ({ store, req }) => {
     createPersistedState({
-        // paths: ['user.order'],
         paths: [],
         storage: {
             getItem: (key) => {
                 // See https://nuxtjs.org/guide/plugins/#using-process-flags
                 if (process.server) {
-                    const parsedCookies = cookie.parse(req.headers.cookie);
+                    let headerCookie = req.headers.cookie;
+                    if (typeof headerCookie !== 'string') {
+                        headerCookie = '';
+                    }
+                    const parsedCookies = cookie.parse(headerCookie);
                     return parsedCookies[key];
                 }
                 return Cookies.get(key);

@@ -185,7 +185,7 @@ export default {
         transpile: [/^element-ui/],
         babel: {
             plugins: [
-                '@babel/plugin-proposal-optional-chaining',
+                ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
             ],
         },
     },

@@ -3,7 +3,7 @@
         <swiper ref="swiperImages" :options="swiperImageOptions" class="swiper">
             <swiper-slide v-for="(image, index) in product.images" :key="index">
                 <el-image
-                    style="width: 100%; aspect-ratio: 5/6"
+                    style="width: 100%;"
                     :src="image.url"
                     :preview-src-list="product.images"
                     fit="fill"
@@ -14,7 +14,7 @@
         <swiper ref="swiperThumbs" class="swiper" :options="swiperThumbOption">
             <swiper-slide v-for="(image, index) in product.images" :key="index">
                 <el-image
-                    style="width: 100%; aspect-ratio: 5/6"
+                    style="width: 100%;"
                     :src="image.url"
                     fit="fill"
                 />

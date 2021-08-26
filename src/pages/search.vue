@@ -1,5 +1,6 @@
 <template>
-    <ContentView :links="navbarLinks" class="content-section flex justify-between items-start mb-2">
+    <div class="content-section flex justify-between items-start mb-2">
+        <BreadCrumb :breadcrumb="navbarLinks" />
         <CategoriesMenu :categories="categories" title="Tìm theo danh mục" class="mt-12 mr-2" />
         <div class="flex-grow flex flex-col">
             <div class="flex justify-between items-center h-12">
@@ -46,7 +47,7 @@
                 </el-tab-pane>
             </el-tabs>
         </div>
-    </ContentView>
+    </div>
 </template>
 
 <script>
@@ -54,7 +55,7 @@
     import { getProducts, getDistributors } from '~/api/search';
     import AgencyItem from '~/components/agencies/SearchItem.vue';
     import CategoriesMenu from '~/components/categories/Menu.vue';
-    import ContentView from '~/components/layout/View.vue';
+    import BreadCrumb from '~/components/layout/BreadCrumb.vue';
     import ProductItem from '~/components/products/Item.vue';
     import SelectFilter from '~/components/filters/Select.vue';
 
@@ -62,7 +63,7 @@
         components: {
             AgencyItem,
             CategoriesMenu,
-            ContentView,
+            BreadCrumb,
             ProductItem,
             SelectFilter,
         },

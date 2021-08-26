@@ -3,20 +3,6 @@
         <div class="bg-ctv hidden py-2 sm:block sm:w-full sticky top-0 z-30">
             <Header class="content-section text-white" />
         </div>
-        <div class="content-section w-full my-1">
-            <el-breadcrumb v-if="breadcrumb.length" separator-class="el-icon-arrow-right">
-                <transition-group name="breadcrumb">
-                    <el-breadcrumb-item
-                        v-for="item in breadcrumb"
-                        :key="item.link"
-                        :to="item.link"
-                        class="text-xs"
-                    >
-                        {{ item.title }}
-                    </el-breadcrumb-item>
-                </transition-group>
-            </el-breadcrumb>
-        </div>
         <div class="flex-grow main-content -p-5">
             <nuxt />
             <el-backtop target=".main-content" />
@@ -35,46 +21,14 @@
             Footer,
         },
 
-        data: () => ({
-            breadcrumb: [],
-        }),
-
-        provide() {
-            return {
-                setBreadcrumb: this.setBreadcrumb,
-            };
-        },
-
-        mounted() {
-            this.breadcrumb = [];
-        },
-
-        methods: {
-            setBreadcrumb(value) {
-                this.breadcrumb = value;
-            },
-        },
-
         head: () => ({
             title: 'Battay - Kinh doanh không cần vốn',
+            link: [
+                {
+                    href: 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;0,900;1,100;1,400;1,700;1,900&display=swap',
+                    rel: 'stylesheet',
+                },
+            ],
         }),
     };
 </script>
-
-<style lang="scss" module>
-    .header {
-        height: auto !important;
-        background-color: #4267b2;
-    }
-    .main {
-        padding: 0;
-    }
-</style>
-
-<style lang="scss">
-    .content-container {
-        @apply lg:w-8/12;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-</style>
