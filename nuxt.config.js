@@ -96,8 +96,8 @@ export default {
     },
 
     axios: {
-        baseURL: `${API_HOST}${API_PATH}`,
-        prefix: API_PATH,
+        baseURL: API_HOST,
+        browserBaseURL: API_PATH,
     },
 
     auth: {
