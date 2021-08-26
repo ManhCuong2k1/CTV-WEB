@@ -48,6 +48,7 @@
             // toImage,
             async signOut() {
                 await this.$auth.logout();
+                this.$store.commit('cart/clearCart');
                 this.$message.success('Đăng xuất thành công');
                 this.$router.push('/');
             },

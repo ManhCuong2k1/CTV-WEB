@@ -22,7 +22,7 @@
                 :class="$style['categories-menu-item']"
                 class="truncate"
             >
-                {{ category.name }} {{ category.id }}
+                {{ category.name }}
             </el-menu-item>
         </el-menu>
     </el-aside>

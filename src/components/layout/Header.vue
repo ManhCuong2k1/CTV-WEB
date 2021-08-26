@@ -12,8 +12,17 @@
                 <Search />
             </el-col>
             <el-col :xs="6" :sm="4" class="flex justify-end items-center">
-                <div v-if="isLoggedIn">
-                    <i class="text-2xl 2xl:mr-9 md:mr-7 sm:mr-4 mr-2 el-icon-shopping-cart-1" />
+                <div v-if="isLoggedIn" class="flex">
+                    <div class="2xl:mr-9 md:mr-7 sm:mr-4 mr-2">
+                        <nuxt-link v-if="totalAmount" to="/cart">
+                            <el-badge :value="totalAmount" :hidden="totalAmount <= 0">
+                                <i class="text-2xl el-icon-shopping-cart-1" />
+                            </el-badge>
+                        </nuxt-link>
+                        <div v-else @click="emptyCartAlert">
+                            <i class="text-2xl el-icon-shopping-cart-1 cursor-pointer" />
+                        </div>
+                    </div>
                     <i class="text-2xl 2xl:mr-9 md:mr-7 sm:mr-4 mr-2 far fa-bell" />
                     <UserMenu />
                 </div>
@@ -28,6 +37,7 @@
 </template>
 
 <script>
+    import { mapGetters, mapState } from 'vuex';
     import UserMenu from '~/components/layout/UserMenu.vue';
     import Search from '~/components/layout/Search.vue';
 
@@ -38,8 +48,16 @@
         },
 
         computed: {
+            ...mapState('cart', ['cartList']),
+            ...mapGetters('cart', ['totalAmount']),
             isLoggedIn() {
                 return this.$auth.loggedIn;
+            },
+        },
+
+        methods: {
+            emptyCartAlert() {
+                this.$message.warning('Giỏ hàng trống');
             },
         },
     };
