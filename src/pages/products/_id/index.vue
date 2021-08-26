@@ -43,7 +43,7 @@
                             <el-input-number v-model="quantity" size="small" :min="1" />
                         </div>
                         <div class="flex justify-start items-center flex-wrap mt-4">
-                            <el-button size="medium">
+                            <el-button size="medium" @click="copyContent">
                                 <div class="flex items-center">
                                     <i class="el-icon-document-copy text-lg mr-1" /> Sao chép
                                 </div>
@@ -175,6 +175,22 @@
                     amount: this.quantity,
                 });
                 this.$message.success('Thêm sản phẩm vào giỏ hàng thành công');
+            },
+
+            copyContent() {
+                if (this.product.content) {
+                    try {
+                        const input = document.createElement('input');
+                        input.setAttribute('value', this.product.content);
+                        document.body.appendChild(input);
+                        input.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(input);
+                        this.$message.success('Đã sao chép mô tả!');
+                    } catch (error) {
+                        this.$message.erorr('Có lỗi xảy ra vui lòng thử lại sau');
+                    }
+                }
             },
         },
     };
