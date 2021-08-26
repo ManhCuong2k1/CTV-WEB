@@ -23,7 +23,7 @@
                             <i class="text-2xl el-icon-shopping-cart-1 cursor-pointer" />
                         </div>
                     </div>
-                    <i class="text-2xl 2xl:mr-9 md:mr-7 sm:mr-4 mr-2 far fa-bell" />
+                    <NotiList class="2xl:mr-9 md:mr-7 sm:mr-4 mr-2" />
                     <UserMenu />
                 </div>
                 <div v-else>
@@ -39,10 +39,12 @@
 <script>
     import { mapGetters, mapState } from 'vuex';
     import UserMenu from '~/components/layout/UserMenu.vue';
+    import NotiList from '~/components/layout/NotiList.vue';
     import Search from '~/components/layout/Search.vue';
 
     export default {
         components: {
+            NotiList,
             Search,
             UserMenu,
         },

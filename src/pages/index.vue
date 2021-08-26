@@ -56,13 +56,15 @@
         </div>
 
         <div class="mt-6">
-            <div class="flex items-center mb-2" :class="[isLoggedIn ? 'justify-start' : 'justify-between']">
-                <span class="text-lg font-bold">8.123 Thành viên đang hoạt động</span>
-                <nuxt-link v-if="!isLoggedIn" to="/register" class="text-gray-400">
-                    Đăng ký <i class="el-icon-right" />
-                </nuxt-link>
+            <div class="index-section">
+                <div class="flex items-center mb-2" :class="[isLoggedIn ? 'justify-start' : 'justify-between']">
+                    <span class="text-lg font-bold">8.123 Thành viên đang hoạt động</span>
+                    <nuxt-link v-if="!isLoggedIn" to="/register" class="text-gray-400">
+                        Đăng ký <i class="el-icon-right" />
+                    </nuxt-link>
+                </div>
+                <UsersCarousel :users="topUsers" />
             </div>
-            <UsersCarousel :users="topUsers" />
         </div>
 
         <div class="bg-white py-6 mt-4 px-2 sm:px-0">
