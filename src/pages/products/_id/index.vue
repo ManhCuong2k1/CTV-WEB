@@ -16,6 +16,14 @@
                         <div class="text-xs mb-2">
                             Mã SP: <span class="font-bold">{{ product.id }}</span>
                         </div>
+                        <div>
+                            <div v-if="product.note">
+                                {{ product.note }}
+                            </div>
+                            <div v-else>
+                                Giao hàng trong vòng 1 đến 3 ngày
+                            </div>
+                        </div>
                         <el-divider class="m-0" />
                         <div class="flex justify-between flex-wrap mt-4">
                             <div class="text-lg">
