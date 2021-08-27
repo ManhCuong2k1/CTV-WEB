@@ -26,7 +26,17 @@
             <div class="flex justify-between items-center text-xs mb-4">
                 <div>Bán lẻ:</div>
                 <div v-if="isLoggedIn">
-                    {{ product.price | formatNumber }}₫
+                    <div v-if="canViewPrice">
+                        {{ product.price | formatNumber }}₫
+                    </div>
+                    <el-tag
+                        v-else
+                        type="danger"
+                        effect="plain"
+                        size="mini"
+                    >
+                        <span class="text-xs">Không đủ cấp TV</span>
+                    </el-tag>
                 </div>
                 <nuxt-link v-else to="/login">
                     <el-tag
@@ -43,6 +53,9 @@
 </template>
 
 <script>
+    import _find from 'lodash/find';
+    import { mapState } from 'vuex';
+
     export default {
         props: {
             product: {
@@ -60,8 +73,18 @@
         },
 
         computed: {
+            ...mapState(['info']),
+
             isLoggedIn() {
                 return this.$auth.loggedIn;
+            },
+
+            canViewPrice() {
+                const authUser = this.$auth.user;
+                // eslint-disable-next-line eqeqeq
+                const priceLevel = _find(this.info.priceLevel, (level) => level.value == authUser.level);
+
+                return this.product.price <= priceLevel.max || priceLevel.max === -1;
             },
         },
     };

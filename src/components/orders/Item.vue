@@ -15,9 +15,6 @@
                 </div>
             </div>
             <div class="flex items-center">
-                <div class="text-xs text-gray-500 mr-2">
-                    {{ order.createdAt | formatDate }}
-                </div>
                 <nuxt-link :to="`/orders/${order.id}`">
                     <el-tag :type="statusOption.type" effect="plain">
                         {{ statusOption.label }}
@@ -63,15 +60,27 @@
                 </div>
             </div>
         </div>
-        <div class="items-center grid grid-cols-10 px-4 py-2">
-            <div :class="[!isRetail ? 'col-span-7' : 'col-span-8']" class="flex items-center">
-                Tổng số {{ order.ProductOrders.length | formatNumber }} sản phẩm
+        <div>
+            <div class="items-center grid grid-cols-10 px-4 py-2">
+                <div :class="[!isRetail ? 'col-span-7' : 'col-span-8']" class="flex items-center">
+                    Tổng số {{ order.ProductOrders.length | formatNumber }} sản phẩm
+                </div>
+                <div v-if="!isRetail" class="text-right text-green-500">
+                    {{ order.total - order.totalAfterPromotion | formatNumber }}₫
+                </div>
+                <div class="text-right font-bold text-lg col-span-2">
+                    {{ order.total | formatNumber }}₫
+                </div>
             </div>
-            <div v-if="!isRetail" class="text-right text-green-500">
-                {{ order.total - order.totalAfterPromotion | formatNumber }}₫
-            </div>
-            <div class="text-right font-bold text-lg col-span-2">
-                {{ order.total | formatNumber }}₫
+            <div class="flex justify-between items-center px-4 py-2">
+                <div class="text-xs text-gray-500 mr-2">
+                    {{ order.createdAt | formatDate }}
+                </div>
+                <nuxt-link :to="`/orders/${order.id}`" class="uppercase text-gray-500">
+                    <el-button plain size="medium" type="primary">
+                        Xem chi tiết
+                    </el-button>
+                </nuxt-link>
             </div>
         </div>
     </div>

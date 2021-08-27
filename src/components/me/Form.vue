@@ -82,6 +82,9 @@
                 placeholder="Địa chỉ chi tiết"
             />
         </el-form-item>
+        <el-form-item label="Cấp thành viên">
+            {{ authUser.level }}
+        </el-form-item>
         <el-form-item>
             <el-button type="primary" @click="submit">
                 Lưu
