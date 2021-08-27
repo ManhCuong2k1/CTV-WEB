@@ -5,7 +5,7 @@
                 <el-image
                     style="width: 100%;"
                     :src="image.url"
-                    :preview-src-list="product.images"
+                    :preview-src-list="previewList"
                     fit="fill"
                 />
             </swiper-slide>
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+    import _map from 'lodash/map';
+
     export default {
         props: {
             product: {
@@ -54,6 +56,12 @@
                     slideToClickedSlide: true,
                 },
             };
+        },
+
+        computed: {
+            previewList() {
+                return _map(this.product.images, (image) => image.url);
+            },
         },
 
         mounted() {
