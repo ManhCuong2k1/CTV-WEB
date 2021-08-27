@@ -21,7 +21,7 @@ export const options = [{
     value: SUCCESS,
     type: 'success',
 }, {
-    label: 'Hủy',
+    label: 'Đã hủy',
     value: CANCELED,
     type: 'danger',
 }];

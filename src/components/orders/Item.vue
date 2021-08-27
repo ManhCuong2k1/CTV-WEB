@@ -1,6 +1,6 @@
 <template>
     <div class="border">
-        <div class="flex justify-between items-center border-b px-4 py-2 bg-gray-100">
+        <div class="flex justify-between items-center border-b px-4 py-2 bg-blue-50">
             <div class="flex items-center">
                 <nuxt-link :to="`/agencies/${order.Admin.id}`" class="flex items-center mr-4">
                     <el-avatar :src="order.Admin.avatar" :size="50" icon="el-icon-user-solid" />
@@ -18,9 +18,11 @@
                 <div class="text-xs text-gray-500 mr-2">
                     {{ order.createdAt | formatDate }}
                 </div>
-                <el-tag :type="statusOption.type" effect="plain">
-                    {{ statusOption.label }}
-                </el-tag>
+                <nuxt-link :to="`/orders/${order.id}`">
+                    <el-tag :type="statusOption.type" effect="plain">
+                        {{ statusOption.label }}
+                    </el-tag>
+                </nuxt-link>
                 <el-divider direction="vertical" />
                 <div class="uppercase text-gray-500">
                     {{ isRetail ? 'Giá bán lẻ' : 'Giá thành viên' }}
@@ -63,7 +65,7 @@
         </div>
         <div class="items-center grid grid-cols-10 px-4 py-2">
             <div :class="[!isRetail ? 'col-span-7' : 'col-span-8']" class="flex items-center">
-                Tổng sô {{ order.ProductOrders.length | formatNumber }} sản phẩm
+                Tổng số {{ order.ProductOrders.length | formatNumber }} sản phẩm
             </div>
             <div v-if="!isRetail" class="text-right text-green-500">
                 {{ order.total - order.totalAfterPromotion | formatNumber }}₫
