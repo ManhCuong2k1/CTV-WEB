@@ -358,6 +358,9 @@
                     this.loading = true;
                     this.form.products = this.$store.state.cart.cartList;
                     await create(this.form);
+                    await this.$store.dispatch('cart/clearCart');
+                    this.$router.push('/');
+                    this.$message.success('Đơn hàng đã được tạo thành công');
                 } catch (error) {
                     this.$message.error('Có lỗi xảy ra vui lòng thử lại sau');
                 } finally {

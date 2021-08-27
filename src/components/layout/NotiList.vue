@@ -66,7 +66,6 @@
             ...mapGetters('notifications', ['hasMore', 'unRead']),
 
             clear() {
-                console.log('hes');
                 if (this.unRead() > 0) {
                     this.clearUnread();
                 }
@@ -97,7 +96,6 @@
             },
 
             onShow() {
-                console.log('hesss');
                 this.clear();
                 this.openTime = new Date().getTime();
             },
