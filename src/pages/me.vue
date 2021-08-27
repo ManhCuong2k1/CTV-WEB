@@ -1,6 +1,6 @@
 <template>
     <div class="h-full">
-        <BreadCrumb :breadcrumb="navbarLinks" />
+        <BreadCrumb :breadcrumb="navbarLinks" class="py-2" />
         <div class="content-section flex justify-between mb-4">
             <Sidebar class="bg-white px-2 py-4 mr-2 mt-0" />
             <div class="bg-white flex-grow p-6">
@@ -24,7 +24,7 @@
             navbarLinks() {
                 return [
                     { title: 'Trang chủ', link: '/' },
-                    { title: 'Tiện ích - Gia dụng', link: '/' },
+                    { title: 'Thông tin tài khoản', link: '/me' },
                 ];
             },
         },
