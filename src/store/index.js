@@ -1,10 +1,18 @@
 // store/index.js
+import { getInfo } from '~/api/system';
 
-export const actions = {
+const state = () => ({
+    info: null,
+});
+
+const actions = {
     // https://nuxtjs.org/guide/vuex-store/#the-nuxtserverinit-action
     // automatically refresh the access token on the initial request to the server, if possible
-    async nuxtServerInit({ dispatch, state }) {
+    async nuxtServerInit({ dispatch, state, commit }) {
         const { accessToken, refreshToken } = state.auth;
+        const info = await getInfo();
+        commit('setInfo', info);
+
         if (accessToken && refreshToken) {
             try {
                 // refresh the access token
@@ -15,4 +23,16 @@ export const actions = {
             }
         }
     },
+};
+
+const mutations = {
+    setInfo(state, info) {
+        state.info = info;
+    },
+};
+
+export {
+    state,
+    actions,
+    mutations,
 };

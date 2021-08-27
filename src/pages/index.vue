@@ -17,7 +17,7 @@
             <div class="index-section py-6">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-lg font-bold">Sản phẩm mới</span>
-                    <nuxt-link to="/products" class="text-gray-400">
+                    <nuxt-link to="/search" class="text-gray-400">
                         Xem tất cả <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
@@ -109,11 +109,11 @@
                         class="p-1"
                     />
                 </div>
-                <div class="flex justify-center mt-4">
+                <!-- <div class="flex justify-center mt-4">
                     <el-button type="primary" size="medium">
                         <span class="md:px-48">Xem tất cả</span>
                     </el-button>
-                </div>
+                </div> -->
             </div>
         </div>
 

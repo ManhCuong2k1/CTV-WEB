@@ -21,32 +21,23 @@
                         </el-button>
                     </div>
                 </div>
-                <el-tabs v-model="activeTabName" class="search-tab flex-grow w-full bg-white">
-                    <el-tab-pane label="Sản phẩm" name="products">
-                        <div :class="{'grid xs:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5' : isGridLayout}">
-                            <div v-for="(product, index) in products" :key="index">
-                                <ProductItem :is-grid="isGridLayout" :product="product" class="p-1" />
-                            </div>
+                <div class="search-tab flex-grow w-full bg-white">
+                    <div :class="{'grid xs:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5' : isGridLayout}">
+                        <div v-for="(product, index) in products" :key="index">
+                            <ProductItem :is-grid="isGridLayout" :product="product" class="p-1" />
                         </div>
-                        <div class="flex justify-center mt-4 mb-2">
-                            <el-button type="primary" size="small" round>
-                                <span class="px-36">Xem thêm</span>
-                            </el-button>
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="Nhà cung cấp" name="agencies" class="p-4">
-                        <div class="grid xs:grid-cols-1 md:grid-cols-2 gap-4">
-                            <div v-for="index in 6" :key="index">
-                                <AgencyItem :agency="agencies[0]" />
-                            </div>
-                        </div>
-                        <div class="flex justify-center mt-4 mb-2">
-                            <el-button type="primary" size="small" round>
-                                <span class="px-36">Xem thêm</span>
-                            </el-button>
-                        </div>
-                    </el-tab-pane>
-                </el-tabs>
+                    </div>
+                    <div v-if="pagination.page < pagination.totalPage" class="flex justify-center mt-4 mb-2">
+                        <el-button
+                            type="primary"
+                            size="small"
+                            round
+                            @click="loadMore"
+                        >
+                            <span class="px-36">Xem thêm</span>
+                        </el-button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -54,8 +45,8 @@
 
 <script>
     import { mapState } from 'vuex';
+    import _concat from 'lodash/concat';
     import { getAll as getProducts } from '~/api/products';
-    import AgencyItem from '~/components/agencies/SearchItem.vue';
     import CategoriesMenu from '~/components/categories/Menu.vue';
     import BreadCrumb from '~/components/layout/BreadCrumb.vue';
     import ProductItem from '~/components/products/Item.vue';
@@ -63,7 +54,6 @@
 
     export default {
         components: {
-            AgencyItem,
             CategoriesMenu,
             BreadCrumb,
             ProductItem,
@@ -74,13 +64,16 @@
             await store.dispatch('agencies/getAgencies');
             await store.dispatch('categories/getCategories');
 
-            const { data: products } = await getProducts(query);
-            // const { data: agencies } = await getDistributors(query);
-
-            // console.log(agencies);
+            const res = await getProducts(query);
 
             return {
-                products,
+                products: res.data,
+                pagination: {
+                    page: res.page,
+                    pageSize: res.pageSize,
+                    total: res.total,
+                    totalPage: Math.ceil(res.total / res.pageSize),
+                },
             };
         },
 
@@ -102,7 +95,6 @@
         computed: {
             ...mapState('agencies', ['agencies']),
             ...mapState('categories', ['categories']),
-            ...mapState('products', ['products']),
 
             navbarLinks() {
                 return [
@@ -119,6 +111,19 @@
         methods: {
             changeProductLayout() {
                 this.isGridLayout = !this.isGridLayout;
+            },
+
+            async loadMore() {
+                const query = this.$route.query;
+                query.page = this.pagination.page + 1;
+                const res = await getProducts(query);
+                this.products = _concat(this.products, res.data);
+                this.pagination = {
+                    page: res.page,
+                    pageSize: res.pageSize,
+                    total: res.total,
+                    totalPage: Math.ceil(res.total / res.pageSize),
+                };
             },
         },
 

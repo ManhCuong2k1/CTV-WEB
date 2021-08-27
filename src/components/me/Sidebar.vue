@@ -18,7 +18,7 @@
             <el-menu-item index="/me">
                 <i class="el-icon-user" />Thông tin cá nhân
             </el-menu-item>
-            <el-menu-item index="/me/purchase">
+            <el-menu-item index="/me/orders">
                 <i class="el-icon-shopping-bag-1" />Đơn mua
             </el-menu-item>
             <el-menu-item index="/me/notifications">

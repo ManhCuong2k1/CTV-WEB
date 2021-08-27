@@ -44,8 +44,13 @@
                                     <ProductItem :is-grid="isGridLayout" :product="product" class="p-1" />
                                 </div>
                             </div>
-                            <div class="flex justify-center mt-4">
-                                <el-button type="primary" size="small" round>
+                            <div v-if="pagination.page < pagination.totalPage" class="flex justify-center mt-4">
+                                <el-button
+                                    type="primary"
+                                    size="small"
+                                    round
+                                    @click="loadMore"
+                                >
                                     <span class="px-36">Xem thêm</span>
                                 </el-button>
                             </div>
@@ -61,6 +66,7 @@
 </template>
 
 <script>
+    import _concat from 'lodash/concat';
     import { getAgency } from '~/api/agencies';
     import { getAll as getCategories } from '~/api/categories';
     import { getAll as getProducts } from '~/api/products';
@@ -87,16 +93,24 @@
             const { data: newProducts } = await getProducts({
                 distributorId: params.id,
             });
-            const { data: products } = await getProducts({
+            const res = await getProducts({
                 distributorId: params.id,
                 categoryId: query.categoryId,
             });
+            const products = res.data;
+            const pagination = {
+                page: res.page,
+                pageSize: res.pageSize,
+                total: res.total,
+                totalPage: Math.ceil(res.total / res.pageSize),
+            };
 
             return {
                 agency,
                 categories,
                 products,
                 newProducts,
+                pagination,
             };
         },
 
@@ -126,6 +140,21 @@
         methods: {
             changeProductLayout() {
                 this.isGridLayout = !this.isGridLayout;
+            },
+
+            async loadMore() {
+                const res = await getProducts({
+                    distributorId: this.agency.id,
+                    categoryId: this.$route.query.categoryId,
+                    page: this.pagination.page + 1,
+                });
+                this.products = _concat(this.products, res.data);
+                this.pagination = {
+                    page: res.page,
+                    pageSize: res.pageSize,
+                    total: res.total,
+                    totalPage: Math.ceil(res.total / res.pageSize),
+                };
             },
         },
 

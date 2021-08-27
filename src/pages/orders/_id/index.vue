@@ -115,7 +115,7 @@
                 return [
                     { title: 'Trang chủ', link: '/' },
                     { title: 'Thông tin tài khoản', link: '/me' },
-                    { title: 'Đơn mua', link: '/me/purchase' },
+                    { title: 'Đơn mua', link: '/me/orders' },
                     { title: 'Chi tiết đơn hàng', link: `/orders/${this.order.id}` },
                 ];
             },
