@@ -107,40 +107,21 @@
                 :rules="rules"
             >
                 <el-form-item label="Người nhận">
-                    <el-input v-if="isRetail" v-model="form.customer.customerFullname" placeholder="Nhập tên người nhận" />
-                    <el-input v-else v-model="authUser.name" disabled />
+                    <el-input v-model="form.customer.customerFullname" placeholder="Nhập tên người nhận" />
                 </el-form-item>
                 <el-form-item label="Di động">
                     <el-input
-                        v-if="isRetail"
                         v-model="form.customer.customerPhone"
                         placeholder="Nhập số điện thoại"
                     />
-                    <el-input v-else v-model="authUser.phone" disabled />
                 </el-form-item>
                 <el-form-item label="Địa chỉ">
                     <el-row :gutter="0">
                         <el-col :xs="24" :sm="12">
                             <el-form-item prop="CityId">
                                 <el-select
-                                    v-if="isRetail"
                                     v-model="form.customer.CityId"
                                     class="w-full"
-                                    placeholder="Tính/Thành phố"
-                                    @change="setDistrictData"
-                                >
-                                    <el-option
-                                        v-for="city in infoGeo"
-                                        :key="city.id"
-                                        :value="city.id"
-                                        :label="city.name"
-                                    />
-                                </el-select>
-                                <el-select
-                                    v-else
-                                    v-model="authUser.CityId"
-                                    class="w-full"
-                                    disabled
                                     placeholder="Tính/Thành phố"
                                     @change="setDistrictData"
                                 >
@@ -156,24 +137,8 @@
                         <el-col :xs="24" :sm="12" class="mt-2 md:mt-0 md:pl-2">
                             <el-form-item prop="DistrictId">
                                 <el-select
-                                    v-if="isRetail"
                                     v-model="form.customer.DistrictId"
                                     class="w-full"
-                                    placeholder="Quận/Huyện"
-                                    no-data-text="Chọn Tỉnh/Thành phố trước"
-                                >
-                                    <el-option
-                                        v-for="district in districts"
-                                        :key="district.id"
-                                        :value="district.id"
-                                        :label="district.name"
-                                    />
-                                </el-select>
-                                <el-select
-                                    v-else
-                                    v-model="authUser.DistrictId"
-                                    class="w-full"
-                                    disabled
                                     placeholder="Quận/Huyện"
                                     no-data-text="Chọn Tỉnh/Thành phố trước"
                                 >
@@ -188,15 +153,7 @@
                         </el-col>
                     </el-row>
                     <el-input
-                        v-if="isRetail"
                         v-model="form.customer.customerAddress"
-                        placeholder="Địa chỉ chi tiết"
-                        class="mt-2"
-                    />
-                    <el-input
-                        v-else
-                        v-model="authUser.address"
-                        disabled
                         placeholder="Địa chỉ chi tiết"
                         class="mt-2"
                     />
@@ -213,7 +170,7 @@
                     <span class="font-bold">{{ totalPrice | formatNumber }}đ</span>
                     <span class="text-xs text-gray-400">(Chưa bao gồm phí giao hàng)</span>
                     <span> - </span>
-                    <span>{{ totalAmount | formatNumber }}</span> sản phẩm
+                    <span>Tổng số {{ totalAmount | formatNumber }} sản phẩm</span>
                 </el-form-item>
                 <div class="flex justify-center items-center">
                     <el-button>
@@ -346,6 +303,23 @@
             changeType(type) {
                 if (type === 'member') {
                     this.setDistrictData(this.authUser.CityId);
+                    this.form.customer = {
+                        customerAddress: this.authUser.address,
+                        customerPhone: this.authUser.phone,
+                        customerFullname: this.authUser.name,
+                        customerNote: '',
+                        CityId: this.authUser.CityId,
+                        DistrictId: this.authUser.DistrictId,
+                    };
+                } else {
+                    this.form.customer = {
+                        customerAddress: '',
+                        customerPhone: '',
+                        customerFullname: '',
+                        customerNote: '',
+                        CityId: '',
+                        DistrictId: '',
+                    };
                 }
             },
 
