@@ -31,9 +31,19 @@
                             </div>
                             <div class="text-sm text-right">
                                 <div class="flex justify-end items-center">
-                                    Giá bán lẻ tham khảo:
-                                    <span v-if="isLoggedIn" class="text-red-500 text-xl">
-                                        {{ product.price | formatNumber }}₫
+                                    <span class="mr-2">Giá bán lẻ tham khảo:</span>
+                                    <span v-if="isLoggedIn" class="flex items-center text-red-500 text-xl">
+                                        <div v-if="canViewPrice">
+                                            {{ product.price | formatNumber }}₫
+                                        </div>
+                                        <el-tag
+                                            v-else
+                                            type="danger"
+                                            effect="plain"
+                                            size="mini"
+                                        >
+                                            <span class="text-xs">Không đủ cấp TV</span>
+                                        </el-tag>
                                     </span>
                                     <nuxt-link v-else to="/login" class="ml-2">
                                         <el-tag
@@ -46,9 +56,19 @@
                                     </nuxt-link>
                                 </div>
                                 <div class="flex justify-end items-center mt-2">
-                                    Giá Thành viên:
-                                    <span v-if="isLoggedIn" class="text-red-500 text-xl">
-                                        {{ product.promotionPrice | formatNumber }}₫
+                                    <span class="mr-2">Giá Thành viên:</span>
+                                    <span v-if="isLoggedIn" class="flex items-center text-red-500 text-xl">
+                                        <div v-if="canViewPrice">
+                                            {{ product.promotionPrice | formatNumber }}₫
+                                        </div>
+                                        <el-tag
+                                            v-else
+                                            type="danger"
+                                            effect="plain"
+                                            size="mini"
+                                        >
+                                            <span class="text-xs">Không đủ cấp TV</span>
+                                        </el-tag>
                                     </span>
                                     <nuxt-link v-else to="/login" class="ml-2">
                                         <el-tag
@@ -152,6 +172,7 @@
 </template>
 
 <script>
+    import _find from 'lodash/find';
     import { mapState } from 'vuex';
     import { getAll as getProducts, getProduct } from '~/api/products';
     import AgencyItem from '~/components/agencies/Item.vue';
@@ -200,6 +221,16 @@
 
         computed: {
             ...mapState('products', ['products']),
+            ...mapState(['info']),
+
+            canViewPrice() {
+                const authUser = this.$auth.user;
+                // eslint-disable-next-line eqeqeq
+                const priceLevel = _find(this.info.priceLevel, (level) => level.value == authUser.level);
+
+                return this.product.price <= priceLevel.max || priceLevel.max === -1;
+            },
+
             isLoggedIn() {
                 return this.$auth.loggedIn;
             },
