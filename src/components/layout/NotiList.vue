@@ -4,13 +4,18 @@
             <i class="text-2xl far fa-bell text-white" />
         </el-badge>
         <el-dropdown-menu slot="dropdown" class="noti-list">
-            <el-dropdown-item v-for="(notification, index) in notifications" :key="index" class="noti-list-item border-b last:border-0">
-                <nuxt-link to="#" class="mb-2">
-                    <div>{{ notification.content }}</div>
-                    <div class="text-gray-500 text-xs">
-                        {{ notification.createdAt | humanizeTime }}
-                    </div>
-                </nuxt-link>
+            <div v-if="notifications.length > 0">
+                <el-dropdown-item v-for="(notification, index) in notifications" :key="index" class="noti-list-item border-b last:border-0">
+                    <nuxt-link :to="notification.type === 'order' ? `/orders/${notification.objectId}` : ''" class="mb-2">
+                        <div>{{ notification.content }}</div>
+                        <div class="text-gray-500 text-xs">
+                            {{ notification.createdAt | humanizeTime }}
+                        </div>
+                    </nuxt-link>
+                </el-dropdown-item>
+            </div>
+            <el-dropdown-item v-else class="text-sm">
+                Không có thông báo
             </el-dropdown-item>
             <client-only>
                 <InfiniteLoading
@@ -109,7 +114,7 @@
 .noti-list
     padding: 0px
     max-width: 450px
-    height: 500px
+    max-height: 500px
     overflow-y: auto
     overflow-x: hidden
     .noti-list-item

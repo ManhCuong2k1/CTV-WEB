@@ -150,22 +150,22 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
     import _find from 'lodash/find';
     import _pick from 'lodash/pick';
+    import systemMixin from '~/mixins/system';
     import { validPhone, validPositiveNumbers } from '~/utils/form';
     import {
         checkPhone,
         verifyOtp,
-        update as updateUser,
     } from '~/api/auth';
-    import { getCurrentUser } from '~/api/users';
     import AuthCard from '~/components/AuthCard.vue';
 
     export default {
         components: {
             AuthCard,
         },
+
+        mixins: [systemMixin],
 
         data() {
             const form = {
@@ -219,13 +219,13 @@
                 isPhoneVerified: false,
                 isOtpVerified: false,
                 districts: [],
+                infoGeo: null,
                 loading: false,
                 serverError: false,
             };
         },
 
         computed: {
-            ...mapState('system', ['infoGeo']),
             step() {
                 if (this.isPhoneVerified && !this.isOtpVerified) {
                     return 0;
@@ -247,7 +247,7 @@
 
         async mounted() {
             if (!this.infoGeo) {
-                await this.$store.dispatch('system/getInfoGeo');
+                this.infoGeo = await this.getInfoGeo();
             }
         },
 
@@ -266,8 +266,15 @@
             async checkPhone() {
                 try {
                     this.loading = true;
-                    await checkPhone(this.form.phone);
-                    this.isPhoneVerified = true;
+                    const res = await checkPhone(this.form.phone);
+                    if (res.description === 'Tài khoản đã tồn tại') {
+                        this.serverError = res.description;
+                        setTimeout(() => {
+                            this.serverError = false;
+                        }, 5000);
+                    } else {
+                        this.isPhoneVerified = true;
+                    }
                 } catch (error) {
                     this.$message.error('Có lõi xảy ra vui lòng thử lại sau');
                 } finally {
@@ -298,8 +305,11 @@
                     if (valid) {
                         try {
                             this.loading = true;
-                            await updateUser(_pick(this.form, ['fullname', 'password', 'CityId', 'DistrictId', 'address']));
-                            const user = await getCurrentUser();
+                            await this.$axios.post(
+                                '/auth-user/update',
+                                _pick(this.form, ['fullname', 'password', 'CityId', 'DistrictId', 'address']),
+                            ).then((_) => _.data);
+                            const user = await this.$axios.get('/app/users/me').then((_) => _.data);
                             await this.$auth.setUser(user);
                             this.$router.push('/');
                         } catch (error) {

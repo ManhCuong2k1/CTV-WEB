@@ -1,5 +1,4 @@
 import _countBy from 'lodash/countBy';
-import { getAll, markReadAll } from '~/api/notifications';
 import { updateData } from '~/utils/data';
 
 const state = () => ({
@@ -22,22 +21,6 @@ const getters = {
     unRead: (state) => _countBy(state.notifications, (notification) => notification.status === 'notseen').true,
 };
 
-const fetchData = async (page) => {
-    const { data: res } = await getAll({ page });
-
-    const notifications = res.data;
-    const pagination = {
-        page: res.page,
-        pageSize: res.pageSize,
-        total: res.total,
-    };
-
-    return {
-        notifications,
-        pagination,
-    };
-};
-
 const mutate = (commit, mutation, { notifications, unread, pagination }) => {
     commit(mutation, notifications);
     commit('setUnreadCount', unread);
@@ -47,31 +30,47 @@ const mutate = (commit, mutation, { notifications, unread, pagination }) => {
     });
 };
 
-const markAllRead = async () => {
-    await markReadAll({
-        status: 'seen',
-    });
-};
-
 const actions = {
     async fetchMore({ state, commit }) {
         if (!hasMore(state)) {
             return;
         }
 
-        const notifications = await fetchData(state.batch + 1);
+        const { data: res } = await this.$axios.get('/app/notify-log', { params: { page: state.batch + 1 } });
+        const notifications = {
+            notifications: res.data,
+            pagination: {
+                page: res.page,
+                pageSize: res.pageSize,
+                total: res.total,
+            },
+        };
+
         mutate(commit, 'push', notifications);
-        await markAllRead();
+        await this.$axios.put('/app/notify-log/all', {
+            status: 'seen',
+        }).then((_) => _.data);
         commit('markAllRead');
     },
 
     async fetch({ commit }) {
-        const notifications = await fetchData();
+        const { data: res } = await this.$axios.get('/app/notify-log');
+        const notifications = {
+            notifications: res.data,
+            pagination: {
+                page: res.page,
+                pageSize: res.pageSize,
+                total: res.total,
+            },
+        };
+
         mutate(commit, 'set', notifications);
     },
 
     async clear({ commit }) {
-        await markAllRead();
+        await this.$axios.put('/app/notify-log/all', {
+            status: 'seen',
+        }).then((_) => _.data);
         commit('markAllRead');
     },
 };
