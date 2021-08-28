@@ -238,13 +238,15 @@
 
         methods: {
             async addCart() {
-                if (this.isLoggedIn) {
+                if (this.isLoggedIn && this.canViewPrice) {
                     await this.$store.commit('cart/addToCart', {
                         productId: this.product.id,
                         amount: this.quantity,
                     });
                     this.$message.success('Thêm sản phẩm vào giỏ hàng thành công');
-                } else {
+                } else if (this.isLoggedIn && !this.canViewPrice) {
+                    this.$message.warning('Bạn không đủ cấp TV để mua sản phẩm này');
+                } else if (!this.loggedIn && !this.canViewPrice) {
                     this.$message.warning('Vui lòng đăng nhập để thực hiện chức năng này');
                 }
             },
