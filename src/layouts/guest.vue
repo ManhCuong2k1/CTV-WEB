@@ -1,6 +1,6 @@
 <template>
-    <el-container class="app w-full min-h-screen relative bg-gray-200">
-        <el-header :class="$style.header" class="sticky top-0 z-30">
+    <el-container class="guest app w-full min-h-screen relative bg-gray-200" :class="$style.guest">
+        <el-header :class="$style.header" class="bg-ctv hidden py-2 sm:block sm:w-full sticky top-0 z-30">
             <Header class="mx-auto lg:w-8/12 text-white" :title="title" />
         </el-header>
         <el-container>
@@ -48,9 +48,11 @@
 </script>
 
 <style lang="scss" module>
+    .guest {
+        font-family: "Roboto";
+    }
     .header {
         height: auto !important;
-        background-color: #4267b2;
     }
     .main {
         padding: 0;

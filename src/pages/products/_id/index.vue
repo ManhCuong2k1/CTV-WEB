@@ -109,8 +109,7 @@
                                 @click="addCart"
                             >
                                 <div class="flex items-center">
-                                    <i class="el-icon-shopping-cart-1 text-lg mr-1"> Thêm vào giỏ hàng
-                                    </i>
+                                    <i class="el-icon-shopping-cart-1 text-lg mr-1" /> Thêm vào giỏ hàng
                                 </div>
                             </el-button>
                         </div>
@@ -224,6 +223,10 @@
             ...mapState(['info']),
 
             canViewPrice() {
+                if (!this.isLoggedIn) {
+                    return false;
+                }
+
                 const authUser = this.$auth.user;
                 // eslint-disable-next-line eqeqeq
                 const priceLevel = _find(this.info.priceLevel, (level) => level.value == authUser.level);

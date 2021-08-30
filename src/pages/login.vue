@@ -154,12 +154,6 @@
             };
         },
 
-        inject: ['setTitle'],
-
-        created() {
-            // this.setTitle('Đăng nhập');
-        },
-
         methods: {
             async login() {
                 this.$refs.form.validate(async (valid) => {

@@ -22,10 +22,8 @@
                     Không có thông báo
                 </el-dropdown-item>
                 <client-only>
-                    <InfiniteLoading
+                    <infinite-loading
                         ref="loader"
-                        :distance="50"
-                        spinner="spiral"
                         @infinite="onInfinite"
                     >
                         <span slot="no-uploadResults" />
@@ -35,7 +33,7 @@
                                 Không có thông báo
                             </span>
                         </div>
-                    </InfiniteLoading>
+                    </infinite-loading>
                 </client-only>
             </div>
             <nuxt-link to="/me/notifications" class="py-2 px-4 border-b font-bold border-t text-center">
@@ -47,14 +45,9 @@
 
 <script>
     import { mapActions, mapGetters, mapState } from 'vuex';
-    import InfiniteLoading from 'vue-infinite-loading';
     import { image as toImage } from '~/utils/url';
 
     export default {
-        components: {
-            InfiniteLoading,
-        },
-
         data() {
             return {
                 openTime: new Date().getTime(),

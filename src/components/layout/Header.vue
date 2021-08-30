@@ -26,9 +26,11 @@
                     <NotiList class="2xl:mr-9 md:mr-7 sm:mr-4 mr-2" />
                     <UserMenu />
                 </div>
-                <div v-else>
-                    <nuxt-link to="/login">
-                        Đăng nhập/Đăng ký
+                <div v-else class="w-full">
+                    <nuxt-link to="/login" class="ml-6 flex justify-between items-center text-2xl text-white">
+                        <i class="el-icon-shopping-cart-1" />
+                        <i class="far fa-bell" />
+                        <i class="far fa-user-circle" />
                     </nuxt-link>
                 </div>
             </el-col>
