@@ -16,10 +16,10 @@
             :class="$style['user-menu']"
         >
             <el-menu-item index="/me">
-                <i class="el-icon-user" />Thông tin cá nhân
+                <i class="el-icon-user" />Thông tin tài khoản
             </el-menu-item>
             <el-menu-item index="/me/orders">
-                <i class="el-icon-shopping-bag-1" />Đơn mua
+                <i class="el-icon-shopping-bag-1" />Lịch sử order
             </el-menu-item>
             <el-menu-item index="/me/notifications">
                 <i class="el-icon-bell" />Thông báo
@@ -41,6 +41,12 @@
             userLogged() {
                 return this.$auth.user;
             },
+        },
+
+        head() {
+            return {
+                title: 'Lịch sử order | Battay',
+            };
         },
     };
 </script>

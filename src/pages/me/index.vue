@@ -1,7 +1,8 @@
 <template>
     <div>
         <div>
-            <div class="font-bold text-lg">
+            <div class="font-bold text-xl">
+                <i class="el-icon-user" />
                 Thông tin tài khoản
             </div>
             <div>Quản lý thông tin hồ sơ để bảo vệ tài khoản</div>
@@ -38,6 +39,12 @@
                     this.loading = false;
                 }
             },
+        },
+
+        head() {
+            return {
+                title: 'Thông tin tài khoản | Battay',
+            };
         },
     };
 </script>

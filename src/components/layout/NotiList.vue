@@ -4,35 +4,43 @@
             <i class="text-2xl far fa-bell text-white" />
         </el-badge>
         <el-dropdown-menu slot="dropdown" class="noti-list">
-            <div v-if="notifications.length > 0">
-                <el-dropdown-item v-for="(notification, index) in notifications" :key="index" class="noti-list-item border-b last:border-0">
-                    <nuxt-link :to="notification.type === 'order' ? `/orders/${notification.objectId}` : ''" class="mb-2">
-                        <div>{{ notification.content }}</div>
-                        <div class="text-gray-500 text-xs">
-                            {{ notification.createdAt | humanizeTime }}
-                        </div>
-                    </nuxt-link>
-                </el-dropdown-item>
+            <div class="py-2 px-4 border-b font-bold">
+                Thông báo
             </div>
-            <el-dropdown-item v-else class="text-sm">
-                Không có thông báo
-            </el-dropdown-item>
-            <client-only>
-                <InfiniteLoading
-                    ref="loader"
-                    :distance="50"
-                    spinner="spiral"
-                    @infinite="onInfinite"
-                >
-                    <span slot="no-uploadResults" />
-                    <span slot="no-more" />
-                    <div slot="no-results">
-                        <span v-if="!notifications.length" class="text-sm">
-                            Không có thông báo
-                        </span>
-                    </div>
-                </InfiniteLoading>
-            </client-only>
+            <div class="noti-list-menu">
+                <div v-if="notifications.length > 0">
+                    <el-dropdown-item v-for="(notification, index) in notifications" :key="index" class="noti-list-item border-b last:border-0">
+                        <nuxt-link :to="notification.type === 'order' ? `/orders/${notification.objectId}` : ''" class="mb-2">
+                            <div>{{ notification.content }}</div>
+                            <div class="text-gray-500 text-xs">
+                                {{ notification.createdAt | humanizeTime }}
+                            </div>
+                        </nuxt-link>
+                    </el-dropdown-item>
+                </div>
+                <el-dropdown-item v-else class="text-sm">
+                    Không có thông báo
+                </el-dropdown-item>
+                <client-only>
+                    <InfiniteLoading
+                        ref="loader"
+                        :distance="50"
+                        spinner="spiral"
+                        @infinite="onInfinite"
+                    >
+                        <span slot="no-uploadResults" />
+                        <span slot="no-more" />
+                        <div slot="no-results">
+                            <span v-if="!notifications.length" class="text-sm">
+                                Không có thông báo
+                            </span>
+                        </div>
+                    </InfiniteLoading>
+                </client-only>
+            </div>
+            <nuxt-link to="/me/notifications" class="py-2 px-4 border-b font-bold border-t text-center">
+                Xem tất cả
+            </nuxt-link>
         </el-dropdown-menu>
     </el-dropdown>
 </template>
@@ -114,9 +122,10 @@
 .noti-list
     padding: 0px
     max-width: 450px
-    max-height: 500px
-    overflow-y: auto
-    overflow-x: hidden
+    .noti-list-menu
+        max-height: 450px
+        overflow-y: auto
+        overflow-x: hidden
     .noti-list-item
         font-size: 15px
         padding: 5px 18px

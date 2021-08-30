@@ -267,6 +267,12 @@
                 }
             },
         },
+
+        head() {
+            return {
+                title: `${this.product.name} | Battay`,
+            };
+        },
     };
 </script>
 
