@@ -1,5 +1,10 @@
 <template>
     <div>
+        <div class="font-bold text-xl">
+            <i class="text-xl el-icon-shopping-cart-full" />
+            Lịch sử Order
+        </div>
+        <el-divider />
         <div>
             <OrderItem
                 v-for="order in orders"

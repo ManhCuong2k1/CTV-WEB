@@ -342,5 +342,11 @@
                 }
             },
         },
+
+        head() {
+            return {
+                title: 'Giỏ hàng | Battay',
+            };
+        },
     };
 </script>

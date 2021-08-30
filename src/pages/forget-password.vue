@@ -179,7 +179,7 @@
         layout: 'guest',
 
         head: () => ({
-            title: 'Quên mật khẩu | CTVpro',
+            title: 'Quên mật khẩu | Battay',
         }),
     };
 </script>

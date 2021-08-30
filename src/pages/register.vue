@@ -325,7 +325,7 @@
         layout: 'guest',
 
         head: () => ({
-            title: 'Đăng ký | CTVpro',
+            title: 'Đăng ký | Battay',
         }),
     };
 </script>

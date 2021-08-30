@@ -172,5 +172,11 @@
                 }
             },
         },
+
+        head() {
+            return {
+                title: 'Chi tiết order | Battay',
+            };
+        },
     };
 </script>

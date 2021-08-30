@@ -159,5 +159,11 @@
         },
 
         watchQuery: true,
+
+        head() {
+            return {
+                title: `${this.agency.name} | Battay`,
+            };
+        },
     };
 </script>

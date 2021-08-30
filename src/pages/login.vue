@@ -230,6 +230,12 @@
         },
 
         layout: 'guest',
+
+        head() {
+            return {
+                title: 'Đăng nhập | Battay',
+            };
+        },
     };
 </script>
 

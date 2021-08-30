@@ -128,6 +128,12 @@
         },
 
         watchQuery: true,
+
+        head() {
+            return {
+                title: 'Tìm kiếm | Battay',
+            };
+        },
     };
 </script>
 
