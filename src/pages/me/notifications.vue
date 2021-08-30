@@ -21,10 +21,8 @@
                 Không có thông báo
             </el-dropdown-item>
             <client-only>
-                <InfiniteLoading
+                <infinite-loading
                     ref="loader"
-                    :distance="50"
-                    spinner="spiral"
                     @infinite="onInfinite"
                 >
                     <span slot="no-uploadResults" />
@@ -34,7 +32,7 @@
                             Không có thông báo
                         </span>
                     </div>
-                </InfiniteLoading>
+                </infinite-loading>
             </client-only>
         </div>
     </div>
@@ -42,13 +40,8 @@
 
 <script>
     import { mapActions, mapGetters, mapState } from 'vuex';
-    import InfiniteLoading from 'vue-infinite-loading';
 
     export default {
-        components: {
-            InfiniteLoading,
-        },
-
         async asyncData({ store }) {
             await store.dispatch('notifications/fetch');
         },

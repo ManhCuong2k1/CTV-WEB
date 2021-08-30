@@ -1,5 +1,8 @@
 <template>
     <div class="flex flex-col min-h-screen relative bg-gray-100">
+        <div class="bg-ctv">
+            <SubHeader class="max-w-screen-xl mx-auto text-white text-sm z-30 py-1" />
+        </div>
         <div class="bg-ctv hidden py-2 sm:block sm:w-full sticky top-0 z-30">
             <Header class="content-section text-white" />
         </div>
@@ -14,11 +17,13 @@
 <script>
     import Header from '~/components/layout/Header.vue';
     import Footer from '~/components/layout/Footer.vue';
+    import SubHeader from '~/components/layout/SubHeader.vue';
 
     export default {
         components: {
             Header,
             Footer,
+            SubHeader,
         },
 
         head: () => ({

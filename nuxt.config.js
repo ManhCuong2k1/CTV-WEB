@@ -67,6 +67,7 @@ export default {
         '@/plugins/filters',
         '@/plugins/swiper',
         { src: '@/plugins/persistedState.js' },
+        { src: '@/plugins/infinite-loading', ssr: false },
     ],
 
     buildModules: [
