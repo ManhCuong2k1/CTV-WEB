@@ -17,7 +17,7 @@
             <div class="index-section py-6">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-lg font-bold">Sản phẩm mới</span>
-                    <nuxt-link to="/search" class="text-gray-400">
+                    <nuxt-link to="/search" class="text-gray-400 hover:underline">
                         Xem tất cả <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
@@ -71,7 +71,7 @@
             <div class="index-section">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-lg font-bold text-red-500">Top sản phẩm bán chạy</span>
-                    <nuxt-link to="/search" class="text-gray-400">
+                    <nuxt-link to="/search" class="text-gray-400 hover:underline">
                         Xem tất cả <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
@@ -85,7 +85,7 @@
                     <span class="text-lg text-blue-500 font-bold">
                         <i class="fas fa-chart-line" /> Nhóm hàng dễ bán
                     </span>
-                    <nuxt-link to="/search" class="text-gray-400">
+                    <nuxt-link to="/search" class="text-gray-400 hover:underline">
                         Xem tất cả <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
@@ -97,7 +97,7 @@
             <div class="index-section">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-lg font-bold text-red-500">Giá tốt hôm nay</span>
-                    <nuxt-link to="/search" class="text-gray-400">
+                    <nuxt-link to="/search" class="text-gray-400 hover:underline">
                         Xem tất cả <i class="el-icon-right" />
                     </nuxt-link>
                 </div>
