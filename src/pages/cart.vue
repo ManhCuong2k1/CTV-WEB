@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <div class="text-right">
-                        {{ product.price | formatNumber }}₫
+                        {{ isRetail ? product.price : product.promotionPrice | formatNumber }}₫
                     </div>
                     <div v-if="!isRetail" class="text-right text-green-500">
                         {{ product.price - product.promotionPrice | formatNumber }}₫

@@ -1,6 +1,6 @@
 <template>
     <div class="content-section mb-2">
-        <BreadCrumb :breadcrumb="navbarLinks" />
+        <BreadCrumb :breadcrumb="navbarLinks" class="py-2" />
         <div class="flex justify-between items-start ">
             <CategoriesMenu :categories="categories" title="Tìm theo danh mục" class="mt-12 mr-2 bg-white p-4" />
             <div class="flex-grow flex flex-col">
@@ -82,11 +82,11 @@
                 label: 'Sắp xếp mặc định',
                 value: '',
             }, {
-                label: 'Giá thấp nhất',
-                value: '',
+                label: 'Giá giảm dần',
+                value: 'price_desc',
             }, {
-                label: 'Giá cao nhất',
-                value: '',
+                label: 'Giá tăng dần',
+                value: 'price_asc',
             }],
             isGridLayout: true,
             activeTabName: 'products',
