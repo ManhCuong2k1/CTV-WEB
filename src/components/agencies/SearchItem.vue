@@ -1,9 +1,9 @@
 <template>
-    <nuxt-link :to="`/agencies/${agency.id}`" class="bg-gray-200 rounded-md p-3">
+    <div class="bg-gray-200 rounded-md p-3">
         <div class="flex items-center">
-            <nuxt-link :to="`/agencies/${agency.id}`" class="mr-4">
+            <div class="mr-4">
                 <el-avatar :src="agency.avatar" :size="50" icon="el-icon-user-solid" />
-            </nuxt-link>
+            </div>
             <div class="w-full">
                 <div class="flex justify-between items-center">
                     <div class="truncate mb-1">
@@ -32,7 +32,7 @@
                 </el-image>
             </div>
         </div>
-    </nuxt-link>
+    </div>
 </template>
 
 <script>

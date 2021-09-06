@@ -38,9 +38,9 @@
         </div>
         <div class="content-section bg-white mt-2">
             <div class="flex items-center border-b px-4 py-2">
-                <nuxt-link :to="`/agencies/1`" class="mr-4">
+                <div class="mr-4">
                     <el-avatar src="" :size="50" icon="el-icon-user-solid" />
-                </nuxt-link>
+                </div>
                 <div>
                     <div class="truncate my-1">
                         Cửa hàng đá quý

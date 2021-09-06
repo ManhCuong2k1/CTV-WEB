@@ -35,9 +35,9 @@
         </div>
         <div v-for="agency in cartByAgency" :key="agency.id" class="content-section bg-white mt-4">
             <div class="flex items-center border-b px-6 py-2">
-                <nuxt-link :to="`/agencies/${agency.id}`" class="mr-4">
+                <div class="mr-4">
                     <el-avatar :src="agency.avatar" :size="50" icon="el-icon-user-solid" />
-                </nuxt-link>
+                </div>
                 <div>
                     <div class="truncate my-1">
                         {{ agency.name }}
