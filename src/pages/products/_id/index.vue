@@ -98,7 +98,7 @@
                                     <i class="el-icon-document-copy text-lg mr-1" /> Sao chép
                                 </div>
                             </el-button>
-                            <el-button type="primary" size="medium">
+                            <el-button type="primary" size="medium" @click="download(product.id)">
                                 <div class="flex items-center">
                                     <i class="el-icon-download text-lg mr-1" /> Tải ảnh
                                 </div>
@@ -251,6 +251,15 @@
                     this.$message.warning('Bạn không đủ cấp TV để mua sản phẩm này');
                 } else if (!this.loggedIn && !this.canViewPrice) {
                     this.$message.warning('Vui lòng đăng nhập để thực hiện chức năng này');
+                }
+            },
+            async download(id) {
+                try {
+                    const res = await this.$axios.get(`/app/download/${id}`);
+                    window.location.href = res.data.urlZip;
+                    this.$message.success('Tải ảnh thành công!');
+                } catch (error) {
+                    this.$message.error('Tải ảnh không thành công!');
                 }
             },
 
