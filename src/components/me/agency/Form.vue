@@ -16,10 +16,10 @@
                 />
             </div>
             <el-form-item label="Tên nhà cung cấp" prop="name">
-                <el-input v-model="form.name" placeholder="Nhập tên nhà cung cấp" />
+                <el-input v-model="form.name" placeholder="Nhập tên nhà cung cấp" class="max-w-lg" />
             </el-form-item>
             <el-form-item label="Số điện thoại hỗ trợ KH" prop="hotline">
-                <el-input v-model="form.hotline" placeholder="Nhập số điện thoại hỗ trợ khách hàng" />
+                <el-input v-model="form.hotline" placeholder="Nhập số điện thoại hỗ trợ khách hàng" class="max-w-lg" />
             </el-form-item>
             <el-form-item label="Mật khẩu" prop="password">
                 <div class="flex justify-between items-center">
@@ -28,6 +28,7 @@
                         type="password"
                         placeholder="Nhập mật khẩu"
                         :show-password="true"
+                        class="max-w-lg"
                     />
                 </div>
             </el-form-item>
@@ -37,19 +38,21 @@
                     type="password"
                     placeholder="Nhập lại mật khẩu"
                     :show-password="true"
+                    class="max-w-lg"
                 />
             </el-form-item>
             <el-divider />
             <el-form-item label="Số điện thoại liên hệ" prop="phone">
-                <el-input v-model="form.phone" placeholder="Nhập số điện thoại liên hệ" />
+                <el-input v-model="form.phone" placeholder="Nhập số điện thoại liên hệ" class="max-w-lg" />
             </el-form-item>
             <el-form-item label="Email liên hệ" prop="email">
-                <el-input v-model="form.email" placeholder="Nhập email liên hệ" />
+                <el-input v-model="form.email" placeholder="Nhập email liên hệ" class="max-w-lg" />
             </el-form-item>
             <el-form-item label="Tỉnh/Thành" prop="CityId">
                 <el-select
                     v-model="form.CityId"
                     placeholder="Thành phố"
+                    class="max-w-lg"
                     @change="updateSelectCity"
                 >
                     <el-option
@@ -65,6 +68,7 @@
                     v-model="form.DistrictId"
                     placeholder="Quận huyện"
                     no-data-text="Chọn Tỉnh/Thành phố trước"
+                    class="max-w-lg"
                 >
                     <el-option
                         v-for="district in districts"
@@ -75,7 +79,7 @@
                 </el-select>
             </el-form-item>
             <el-form-item label="Địa chỉ liên hệ (số nhà, đường...)">
-                <el-input v-model="form.address" placeholder="Nhập địa chỉ" />
+                <el-input v-model="form.address" placeholder="Nhập địa chỉ" class="max-w-lg" />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="registerAction('form')">
@@ -84,11 +88,11 @@
             </el-form-item>
         </div>
         <div v-else>
-            <div v-if="registration">
-                <div class="text-center text-sm mt-6">
+            <div v-if="registration" class="text-center">
+                <div class=" text-sm mt-6 max-w-lg mx-auto">
                     Mã xác minh của bạn sẽ được gửi bằng tin nhắn đến
                 </div>
-                <div class="text-center text-lg mb-4 font-bold">
+                <div class=" text-lg mb-4 font-bold mx-auto">
                     {{ form.phone | formatPhone }}
                 </div>
                 <el-form
@@ -98,10 +102,10 @@
                     :rules="rules"
                 >
                     <el-form-item prop="otpCode">
-                        <el-input v-model="form.otpCode" placeholder="Nhập mã xác minh" />
+                        <el-input v-model="form.otpCode" placeholder="Nhập mã xác minh" class="max-w-lg" />
                     </el-form-item>
                 </el-form>
-                <el-button type="primary" class="w-full uppercase" @click="verifyOtp">
+                <el-button type="primary" class="w-full uppercase max-w-lg" @click="verifyOtp">
                     Xác minh
                 </el-button>
                 <el-divider />
@@ -116,7 +120,7 @@
                 <div class="text-center text-3xl mb-4">
                     <h1>CHÚC MỪNG ĐĂNG KÝ THÀNH CÔNG !</h1>
                 </div>
-                <nuxt-link to="/" class="text-center rounded-full mx-auto w-32 shadow-xl py-2.5">
+                <nuxt-link to="/" class="text-center underline">
                     Về trang chủ
                 </nuxt-link>
             </div>
