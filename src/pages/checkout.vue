@@ -38,9 +38,6 @@
         </div>
         <div class="content-section bg-white mt-2">
             <div class="flex items-center border-b px-4 py-2">
-                <div class="mr-4">
-                    <el-avatar src="" :size="50" icon="el-icon-user-solid" />
-                </div>
                 <div>
                     <div class="truncate my-1">
                         Cửa hàng đá quý
