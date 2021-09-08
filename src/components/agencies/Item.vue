@@ -1,9 +1,9 @@
 <template>
     <el-row :gutter="10" class="flex items-center">
         <el-col :xs="24" :sm="12" class="flex items-center">
-            <nuxt-link :to="`/agencies/${agency.id}`" class="mr-4">
+            <div class="mr-4">
                 <el-avatar :src="agency.avatar || defaultAvatar" :size="70" icon="el-icon-user-solid" />
-            </nuxt-link>
+            </div>
             <div>
                 <div class="truncate my-1">
                     {{ agency.name }}

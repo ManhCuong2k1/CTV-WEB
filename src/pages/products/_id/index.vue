@@ -117,11 +117,6 @@
                 </el-row>
             </div>
         </div>
-        <div class="bg-white py-8 mt-3">
-            <div class="content-section">
-                <AgencyItem :agency="product.distributorInfo" />
-            </div>
-        </div>
         <div class="bg-white pt-8 pb-1 mt-3">
             <div v-if="product.content" class="content-section bg-white mt-2">
                 <div class="font-bold text-lg">
@@ -174,14 +169,12 @@
     import _find from 'lodash/find';
     import { mapState } from 'vuex';
     import { getAll as getProducts, getProduct } from '~/api/products';
-    import AgencyItem from '~/components/agencies/Item.vue';
     import BreadCrumb from '~/components/layout/BreadCrumb.vue';
     import ProductsCarousel from '~/components/products/Carousel.vue';
     import ImagePreview from '~/components/products/ImagePreview.vue';
 
     export default {
         components: {
-            AgencyItem,
             ImagePreview,
             BreadCrumb,
             ProductsCarousel,

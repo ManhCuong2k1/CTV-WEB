@@ -2,19 +2,6 @@
     <div class="border">
         <div class="flex justify-between items-center border-b px-4 py-2 bg-blue-50">
             <div class="flex items-center">
-                <nuxt-link :to="`/agencies/${order.Admin.id}`" class="flex items-center mr-4">
-                    <el-avatar :src="order.Admin.avatar" :size="50" icon="el-icon-user-solid" />
-                </nuxt-link>
-                <div>
-                    <nuxt-link :to="`/agencies/${order.Admin.id}`" class="truncate mb-1">
-                        {{ order.Admin.name }}
-                    </nuxt-link>
-                    <div class="text-sm text-gray-400">
-                        <i class="fas fa-map-marker-alt mr-1" />{{ order.Admin.District.name }} - {{ order.Admin.City.name }}
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-center">
                 <nuxt-link :to="`/orders/${order.id}`">
                     <el-tag :type="statusOption.type" effect="plain">
                         {{ statusOption.label }}

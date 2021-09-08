@@ -34,19 +34,6 @@
             </div>
         </div>
         <div v-for="agency in cartByAgency" :key="agency.id" class="content-section bg-white mt-4">
-            <div class="flex items-center border-b px-6 py-2">
-                <nuxt-link :to="`/agencies/${agency.id}`" class="mr-4">
-                    <el-avatar :src="agency.avatar" :size="50" icon="el-icon-user-solid" />
-                </nuxt-link>
-                <div>
-                    <div class="truncate my-1">
-                        {{ agency.name }}
-                    </div>
-                    <div class="text-sm text-gray-400">
-                        <i class="fas fa-map-marker-alt mr-1" />Đông Anh - Hà Nội
-                    </div>
-                </div>
-            </div>
             <div>
                 <div v-for="product in agency.products" :key="product.id" class="items-center grid grid-cols-12 px-4 py-2">
                     <div :class="[!isRetail ? 'col-span-6' : 'col-span-7']" class="flex items-center">

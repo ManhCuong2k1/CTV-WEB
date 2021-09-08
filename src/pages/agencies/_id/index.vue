@@ -1,11 +1,6 @@
 <template>
     <div :links="navbarLinks">
         <BreadCrumb :breadcrumb="navbarLinks" />
-        <div class="bg-white py-4">
-            <div class="content-section">
-                <AgencyItem :agency="agency" />
-            </div>
-        </div>
 
         <div class="bg-white py-4 mt-4">
             <div class="content-section">
@@ -70,7 +65,6 @@
     import { getAgency } from '~/api/agencies';
     import { getAll as getCategories } from '~/api/categories';
     import { getAll as getProducts } from '~/api/products';
-    import AgencyItem from '~/components/agencies/Item.vue';
     import CategoryMenu from '~/components/categories/Menu.vue';
     import BreadCrumb from '~/components/layout/BreadCrumb.vue';
     import ProductCarousel from '~/components/products/Carousel.vue';
@@ -79,7 +73,6 @@
 
     export default {
         components: {
-            AgencyItem,
             CategoryMenu,
             BreadCrumb,
             ProductCarousel,
